@@ -71,7 +71,6 @@ def display_class_bundle_options():
 def main_menu():
     show_plan_details()
 
-
 if __name__ == "__main__":
     main_menu()
 

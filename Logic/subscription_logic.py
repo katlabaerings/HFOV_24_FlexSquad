@@ -17,7 +17,6 @@ def get_subscription_plans():
     plans = load_subscription_plans()
     return plans
 
-
 # Get plan information
 def get_plan_details(plan_name):
     plans = load_subscription_plans()
