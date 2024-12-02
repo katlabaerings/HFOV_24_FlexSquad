@@ -13,8 +13,7 @@ def show_plan_details():
     selected_plan = plans[choice - 1]["PlanName"]
     
     print(get_plan_details(selected_plan))
-    
-    # Offer the user additional options after displaying plan details
+
     if selected_plan == "Class Bundle":
         display_class_bundle_options()
     else:

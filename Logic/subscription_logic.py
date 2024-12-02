@@ -4,7 +4,7 @@ import os
 # Load subscription plans from the CSV file
 def load_subscription_plans():
     plans = []
-    script_dir = os.path.dirname(__file__)  # Get the directory of the current script
+    script_dir = os.path.dirname(__file__)  
     file_path = os.path.join(script_dir, '../Data/subscription_data.csv')
     with open(file_path, newline='') as csvfile:
         reader = csv.DictReader(csvfile)
@@ -18,7 +18,7 @@ def get_subscription_plans():
     return plans
 
 
-# Get plan details (description and validity)
+# Get plan information
 def get_plan_details(plan_name):
     plans = load_subscription_plans()
     plan = next((p for p in plans if p["PlanName"] == plan_name), None)
