@@ -36,5 +36,3 @@ def manager_by_id(id: int, file_path=MANAGER_FILE_PATH):
                 return row
 
 
-# if __name__ == "__main__":
-#     class_by_id("../Data/class_data.csv", 1)
