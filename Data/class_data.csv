@@ -1,5 +1,5 @@
-id,class,maxCapacity,currentCapacity,members,trainerId,time,date
-1,ButLift,50,3,1 2 3 ,3,17:00,5/12/2024
-2,SportHiit,50,2,1 3 ,3,18:00,5/12/2024
-3,Crosfit,50,2,1 ,3,17:00,6/12/2024
-4,Spinning,50,2,2 3 ,3,19:00,6/12/2024
+id,class,maxCapacity,currentCapacity,members,trainerId,time,date,virtual
+1,ButLift,50,3,1 2 3 ,3,17:00,5/12/2024,False
+2,SportHiit,50,2,1 3 ,3,18:00,5/12/2024,False
+3,Crosfit,50,2,1 ,3,17:00,6/12/2024,False
+4,Spinning,50,2,2 3 ,3,19:00,6/12/2024,True
