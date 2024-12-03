@@ -1,14 +1,23 @@
 import csv
 import os
+import npyscreen
 from Logic.find_class_by_id import Classes
 
-def get_class_by_id(target_id):
-    class_id = Classes(target_id).get_current_capacity_of_class()
-    print(f"{class_id['class']}: {class_id['maxCapacity']}/{class_id['currentCapacity']}")
+def get_class_by_id(employee_id):
+    employee_classes = Classes(employee_id).get_current_capacity_of_class()
+    return employee_classes
+    # form = npyscreen.Form(name="Classes")
+    # menu_title = form.add(
+    #         npyscreen.FixedText,
+    #         value=employee_classes.class_name,
+    #         editable=False,
+    #         color="STANDOUT",
+    #     )
+    # menu_title.centered = True
 
 def main():
-    class_id = input("Enter class id: ")
-    get_class_by_id(int(class_id))
+    employee_id = input("What is your id: ")
+    get_class_by_id(int(employee_id))
 
 if __name__ == "__main__":
     main()
