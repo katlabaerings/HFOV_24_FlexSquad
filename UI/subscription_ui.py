@@ -1,6 +1,9 @@
 import os
 import sys
 
+########################################################################################################################
+# EKKI NOTAÐ NÚNA HELDUR SUBSCRIPTIONS_MENU.PY Í STAÐINN
+
 # Dynamically add the parent directory to sys.path
 script_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.abspath(os.path.join(script_dir, ".."))
