@@ -26,7 +26,7 @@ def get_plan_details(plan_name):
     if not plan:
         return "Invalid plan name."
 
-    details = f"\n{plan_name} Plan\n"
+    details = f"\n{plan_name}\n"
     details += f"Description: {plan['Description']}\n"
     details += f"Target Audience: {plan['TargetAudience']}\n"
 

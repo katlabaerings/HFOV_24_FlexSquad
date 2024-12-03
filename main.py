@@ -1,3 +1,5 @@
-#runs the program using if __name__ == '__main__': main()
+from UI.main_menu import MainMenuApp
+
 if __name__ == "__main__":
-    pass
+    main_menu = MainMenuApp()
+    main_menu.run()
