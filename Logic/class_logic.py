@@ -18,7 +18,7 @@ from Data.read_data import Data
 #             ret_lis.append(i)
 #     return ret_lis
 
-def read_all_classes():
+def get_all_classes():
         data = Data()
         classes = []
         i = 1
@@ -28,7 +28,7 @@ def read_all_classes():
         return classes
 
 def get_virtual_classes():
-    classes = read_all_classes()
+    classes = get_all_classes()
     v_classes = []
     for f_class in classes:
         if f_class.locality == 'V':
