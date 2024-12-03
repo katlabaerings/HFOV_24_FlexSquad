@@ -1,5 +1,5 @@
 import csv
-import os
+from tabulate import tabulate
 
 from Data.models.manager import Manager
 from Data.models.member import Member
@@ -41,4 +41,32 @@ class Data:
 
         return False
 
+    def get_all_classesDATA(self):
+        all_classes = []
+        with open(self.CLASS_FILE_PATH, newline='', encoding='utf-8') as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                all_classes.append(row)
 
+        # Generate ASCII table
+        headers = ["ID", "Class Name", "Max Capacity", "Current Capacity",
+                   "Members", "Trainer", "Time", "Date", "Locality", "Link"]
+        table_data = [
+            [
+                row['id'],
+                row['class_name'],
+                row['max_capacity'],
+                row['current_capacity'],
+                row['members'],
+                self.manager_by_id(row['trainer_id']).firstname if hasattr(self.manager_by_id(row['trainer_id']),
+                                                                           'firstname') else "Trainer not found",
+                row['time'],
+                row['date'],
+                "Virtual" if row['locality'] == "V" else "Local" if row['locality'] == "L" else row['locality'],
+                row['link']
+            ]
+
+            for row in all_classes
+        ]
+        table = tabulate(table_data, headers=headers, tablefmt="fancy_grid")
+        return table
