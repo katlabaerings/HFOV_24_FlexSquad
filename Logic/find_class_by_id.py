@@ -10,6 +10,10 @@ class Classes:
         data = Data().class_by_id(self.target_id)
        # classId = class_by_id(self.file_path, self.target_id)
         return data
+    
+    def get_classes_by_emp_id(self):
+        data = Data().classes_by_emp_id(self.target_id)
+        return data
 
 
 
