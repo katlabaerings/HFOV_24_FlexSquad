@@ -1,16 +1,16 @@
 import csv
 import os
-from Data.read_data import class_by_id
+from Data.read_data import Data
 
-def main():
-    print("halló")
-    find_class("../Data/class_data.csv",1)
+class Classes:
+    def __init__(self, file_path, target_id):
+        self.file_path = file_path
+        self.target_id = target_id
+    
+    def get_current_capacity_of_class(self):
+        data = Data(self.file_path, self.target_id).class_by_id()
+       # classId = class_by_id(self.file_path, self.target_id)
+        return data
 
 
-def find_class(file_path, target_id):
-    classId = class_by_id(file_path, target_id)
-    return classId
-
-if __name__ == "__main__":
-    main()
 
