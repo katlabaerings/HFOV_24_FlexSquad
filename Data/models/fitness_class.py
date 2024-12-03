@@ -11,3 +11,5 @@ class FitnessClass:
     trainer_id: int
     time: str
     date: str
+    locality: str
+    link: str
