@@ -4,7 +4,7 @@ import csv
 # Load subscription plans from the CSV file
 def load_subscription_plans():
     plans = []
-    file_path = "Data/subscription_data.csv"
+    file_path = "../Data/subscription_data.csv"
     with open(file_path, "r") as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
