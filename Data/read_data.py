@@ -29,11 +29,20 @@ class Data:
                 else:
                     continue
 
+    def member_by_id(self, id: int):
+        with open(self.MEMBER_FILE_PATH, mode="r") as file:
+            csv_reader = csv.DictReader(file)
+            for row in csv_reader:
+                if row["id"] == str(id):
+                    return Member(**row)
+                else:
+                    continue
+
     def manager_by_id(self, id: int):
         with open(self.MANAGER_FILE_PATH, mode="r") as file:
             csv_reader = csv.DictReader(file)
             for row in csv_reader:
-                if row["id"] == str(id):  # Compare as string
+                if row["lastname"] == str(id):  # Compare as string
                     return row
 
 
