@@ -1,3 +1,13 @@
+import os
+import sys
+
+# Dynamically add the parent directory to sys.path
+script_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.abspath(os.path.join(script_dir, '..'))
+if parent_dir not in sys.path:
+    sys.path.insert(0, parent_dir)
+
+
 from Logic.subscription_logic import get_subscription_plans, get_plan_details
 
 
