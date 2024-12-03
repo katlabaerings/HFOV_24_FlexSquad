@@ -1,5 +1,7 @@
 from dataclasses import dataclass
 
+from numpy import character
+
 
 @dataclass
 class FitnessClass:
@@ -11,3 +13,5 @@ class FitnessClass:
     trainer_id: int
     time: str
     date: str
+    locality: str
+    link: str
