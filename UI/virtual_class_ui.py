@@ -19,7 +19,7 @@ class VirtualClasses:
 
     def get_class_by_name(self, aName):
         for aClass in self.virtual_classes:
-            if aClass['class'] == aName:
+            if aClass.class_name == aName:
                 return aClass
 
     def run_class(self, aClass):
@@ -27,7 +27,7 @@ class VirtualClasses:
         time.sleep(1)
         print(f'Please wait for the class to start...')
         time.sleep(2)
-        webbrowser.open(aClass['link'])
+        webbrowser.open(aClass.link)
 
 
 def main():
