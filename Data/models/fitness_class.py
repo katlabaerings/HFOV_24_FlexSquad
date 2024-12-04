@@ -1,5 +1,7 @@
 from dataclasses import dataclass
 
+from numpy import character
+
 from Data.models.manager import Manager
 
 
@@ -10,7 +12,7 @@ class FitnessClass:
     max_capacity: int
     current_capacity: int
     members: str
-    trainer: Manager
+    trainer_id: int
     time: str
     date: str
     locality: str
