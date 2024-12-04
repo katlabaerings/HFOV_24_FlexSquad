@@ -14,7 +14,7 @@ class WriteData:
 
 
 
-    def add_member_to_class(self, member_id, class_id):
+    def add_member_to_classDATA(self, member_id, class_id):
         try:
             # Validate class and member IDs
             self.data.class_by_id(class_id)

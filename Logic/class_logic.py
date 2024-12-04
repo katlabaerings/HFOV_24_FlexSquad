@@ -1,11 +1,13 @@
 import csv
 import os
 from Data.read_data import Data
+from Data.write_data import WriteData
 
 
 class ClassLogic:
     def __init__(self):
         self.data = Data()
+        self.write = WriteData()
 
 
     @staticmethod
@@ -30,3 +32,5 @@ class ClassLogic:
         # except Exception:
         #     return "no classes found..."
 
+    def add_member_to_classLOGIC(self, member_id, class_id):
+        return self.write.add_member_to_classDATA(member_id, class_id)
