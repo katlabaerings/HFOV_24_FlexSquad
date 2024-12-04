@@ -1,4 +1,4 @@
-from Data.read_data import Data
+
 from Logic.class_logic import ClassLogic
 
 
