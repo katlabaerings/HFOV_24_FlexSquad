@@ -19,7 +19,7 @@ class WriteData:
             # Validate class and member IDs
             self.data.class_by_id(class_id)
             self.data.member_by_id(member_id)
-        except Exception:
+        except Exception: # TODO: Specify exception
             return "Class or member does not exist"
 
         # Read all rows from the CSV file
