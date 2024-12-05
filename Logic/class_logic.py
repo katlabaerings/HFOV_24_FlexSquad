@@ -39,7 +39,7 @@ class ClassLogic:
         return returning_classes
 
 
-    #This function is for the userstory "As a gym member, I want to be able to attend virtual classes,
+    #This function is for the user, I want to be able to attend virtual classes,
     #so I can keep working on my health and well-being, even though I can’t physically be there"
     #This function filters out all the classes that are virtual and returns a list of them.
     def get_virtual_classes(self):

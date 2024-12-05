@@ -1,4 +1,6 @@
 import csv
+#This file implements the user story "As a gym member I want more 
+#flexible subscription plans, such as one month or a single class, so that I can easily find the best subscription that suits me"
 
 
 # Load subscription plans from the CSV file
