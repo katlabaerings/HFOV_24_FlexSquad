@@ -1,24 +1,12 @@
-import os
-import sys
 from datetime import datetime
-
-from Logic.class_logic import ClassLogic
-
-"""
-# Dynamically add the parent directory to sys.path
-script_dir = os.path.dirname(os.path.abspath(__file__))
-parent_dir = os.path.abspath(os.path.join(script_dir, ".."))
-if parent_dir not in sys.path:
-    sys.path.insert(0, parent_dir)
 from Data.read_data import Data
-from Logic.class_logic import get_all_classes
-from datetime import datetime
-"""
-class_logic = ClassLogic()
+
+
+data = Data()
 
 
 def display_all_classes():
-    all_classes = class_logic.get_all_classes()
+    all_classes = data.get_all_classes()
     return_str = []
     for a_class in all_classes:
         locality = False
@@ -37,7 +25,7 @@ def display_classes_today():
     month = today.month
     day = today.day
     formatted_date = f"{day}.{month}.{year}"
-    all_classes = class_logic.get_all_classes()
+    all_classes = data.get_all_classes()
     return_str = []
     for a_class in all_classes:
         locality = False
@@ -51,7 +39,7 @@ def display_classes_today():
 
 
 def display_available_classes():
-    all_classes = class_logic.get_all_classes()
+    all_classes = data.get_all_classes()
     for a_class in all_classes:
         locality = False
         if a_class.locality == "L":
@@ -70,4 +58,4 @@ def display_available_classes():
 def sign_up_for_a_class():
     display_available_classes()
     # Get an input from the user for what class we want to sign up to.
-    class_logic.sign_up_for_a_class(member_id, class_id)
+    data.sign_up_for_a_class(member_id, class_id)

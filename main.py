@@ -28,7 +28,7 @@ class GymApp(npyscreen.NPSAppManaged):
         self.addForm(Form.TRAINER, TrainerMenuForm, name="Trainer Menu")
         self.addForm(Form.CLASS_MENU, ClassMenuForm, name="Class Menu")
 
-        self.setNextForm("LOGIN")
+        self.setNextForm(Form.LOGIN)
 
     def onCleanExit(self):
         npyscreen.notify_confirm("Exiting application. Goodbye!", title="Exit")
