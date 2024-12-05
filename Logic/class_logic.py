@@ -57,7 +57,7 @@ def get_classes_by_trainer(trainer_id: int):
     all_classes = get_all_classes()
     returning_classes = []
     for clas in all_classes:
-        if clas.trainer.id == trainer_id:
+        if clas.trainer_id == trainer_id:
             returning_classes.append(clas)
     return returning_classes
 
