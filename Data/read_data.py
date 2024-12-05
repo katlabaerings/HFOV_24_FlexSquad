@@ -103,7 +103,7 @@ class Data:
         headers = ["ID", "Class Name", "Max Capacity", "Current Capacity",
                    "Members", "Trainer", "Time", "Date", "Locality", "Link"]
         table_data = [
-            [r
+            [
                 row['id'],
                 row['class_name'],
                 row['max_capacity'],
