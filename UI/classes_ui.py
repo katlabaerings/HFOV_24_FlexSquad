@@ -2,7 +2,7 @@ import os
 import sys
 from datetime import datetime
 
-from Logic.class_logic import ClassLogic, get_all_classes
+from Logic.class_logic import ClassLogic
 
 """
 # Dynamically add the parent directory to sys.path
@@ -14,10 +14,11 @@ from Data.read_data import Data
 from Logic.class_logic import get_all_classes
 from datetime import datetime
 """
+class_logic = ClassLogic()
 
 
 def display_all_classes():
-    all_classes = get_all_classes()
+    all_classes = class_logic.get_all_classes()
     return_str = []
     for a_class in all_classes:
         locality = False

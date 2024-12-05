@@ -1,6 +1,6 @@
 import npyscreen
 
-from Logic.class_logic import get_classes_by_trainer
+from Logic.class_logic import ClassLogic
 
 
 class TrainerMenuForm(npyscreen.ActionForm):  # Changed to ActionForm
@@ -20,8 +20,8 @@ class TrainerMenuForm(npyscreen.ActionForm):  # Changed to ActionForm
             npyscreen.notify_confirm("Trainer ID cannot be empty.", title="Error")
             self.parentApp.switchForm('MAIN')
             return
-
-        classes = get_classes_by_trainer(trainer_id)
+        class_logic = ClassLogic()
+        classes = class_logic.get_classes_by_trainer(trainer_id)
         if not classes:
             npyscreen.notify_confirm("No classes found for the given Trainer ID.", title="Error")
             self.parentApp.switchForm('MAIN')
