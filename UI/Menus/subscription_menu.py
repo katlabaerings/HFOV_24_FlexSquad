@@ -9,7 +9,6 @@ class SubscriptionForm(npyscreen.ActionForm):  # Changed to ActionForm
         # Title
         self.add(
             npyscreen.FixedText,
-            value="Subscription Plans",
             editable=False,
             color="STANDOUT",
         )

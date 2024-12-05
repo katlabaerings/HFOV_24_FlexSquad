@@ -36,9 +36,7 @@ class ClassesTodayMenu(IMenu):
 
 class PickClassMenu(IMenu):
     def create(self):
-        self.add(
-            npyscreen.FixedText, value="Plan Options", editable=False, color="STANDOUT"
-        )
+        self.add(npyscreen.FixedText, editable=False, color="STANDOUT")
 
         # Post-Plan Options
         self.options = self.add(
