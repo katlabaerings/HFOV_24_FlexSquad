@@ -33,12 +33,7 @@ class ClassLogic:
         the_class = self.data.class_by_id(class_id)
         the_class.members.append(member_id)
 
-<<<<<<< Updated upstream
-=======
     
-
-    
->>>>>>> Stashed changes
     def get_all_classes(self):
         classes = []
         i = 1
