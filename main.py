@@ -1,28 +1,34 @@
 import npyscreen
 
 from UI.Menus.class_menu import AllClassesForm, ClassesToday, PickClass
-from UI.Menus.main_menu import MainMenu
-from UI.Menus.subscription_menu import SubscriptionForm, PostPlanOptionsForm, ClassBundleForm
+from UI.Menus.subscription_menu import (
+    SubscriptionForm,
+    PostPlanOptionsForm,
+    ClassBundleForm,
+)
 from UI.Menus.trainer_menu import TrainerMenuForm, ClassMenuForm
+from UI.Menus.main_menu import MainMenu
 from UI.Menus.login_menu import LoginMenu
+from UI.form_enums import Form
 
 
 class GymApp(npyscreen.NPSAppManaged):
     user_id = None
+
     def onStart(self):
         # Register Forms
-        self.addForm('LOGIN', LoginMenu, name="City Gym Hub Login")
-        self.addForm('MAIN', MainMenu, name="City Gym Hub")
-        self.addForm('SUBSCRIPTION', SubscriptionForm, name="Subscription Plans")
-        self.addForm('PICK_CLASS', PickClass, name="Pick Class Option")
-        self.addForm('ALL_CLASS', AllClassesForm, name="All Classes")
-        self.addForm('CLASS_TODAY', ClassesToday, name='Classes Today')
-        self.addForm('POST_PLAN', PostPlanOptionsForm, name="Post Plan Options")
-        self.addForm('CLASS_BUNDLE', ClassBundleForm, name="Class Bundle Options")
-        self.addForm('TRAINER', TrainerMenuForm, name="Trainer Menu")
-        self.addForm('CLASS_MENU', ClassMenuForm, name="Class Menu")
+        self.addForm(Form.LOGIN, LoginMenu, name="City Gym Hub Login")
+        self.addForm(Form.MAIN, MainMenu, name="City Gym Hub")
+        self.addForm(Form.SUBSCRIPTION, SubscriptionForm, name="Subscription Plans")
+        self.addForm(Form.PICK_CLASS, PickClass, name="Pick Class Option")
+        self.addForm(Form.ALL_CLASS, AllClassesForm, name="All Classes")
+        self.addForm(Form.CLASS_TODAY, ClassesToday, name="Classes Today")
+        self.addForm(Form.POST_PLAN, PostPlanOptionsForm, name="Post Plan Options")
+        self.addForm(Form.CLASS_BUNDLE, ClassBundleForm, name="Class Bundle Options")
+        self.addForm(Form.TRAINER, TrainerMenuForm, name="Trainer Menu")
+        self.addForm(Form.CLASS_MENU, ClassMenuForm, name="Class Menu")
 
-        self.setNextForm('LOGIN')
+        self.setNextForm("LOGIN")
 
     def onCleanExit(self):
         npyscreen.notify_confirm("Exiting application. Goodbye!", title="Exit")
