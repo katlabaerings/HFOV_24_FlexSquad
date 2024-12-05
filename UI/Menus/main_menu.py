@@ -14,8 +14,7 @@ class MainMenu(npyscreen.ActionForm):
             values=[
                 "View Subscription Plans",
                 "Book A Class",
-                "See All Classes",
-                "See Trainer Classes",
+                "See Classes",
                 "Exit"
             ],
             scroll_exit=True,
@@ -33,10 +32,8 @@ class MainMenu(npyscreen.ActionForm):
                 npyscreen.notify_confirm("Feature coming soon!", title="Book a Class")
                 self.parentApp.switchForm('MAIN')
             elif selected == 2:
-                self.parentApp.switchForm('ALL_CLASS')
+                self.parentApp.switchForm('PICK_CLASS')
             elif selected == 3:
-                self.parentApp.switchForm('TRAINER')
-            elif selected == 4:
                 self.parentApp.setNextForm(None)
         else:
             npyscreen.notify_confirm("Please select an option to proceed.", title="Error")

@@ -1,6 +1,6 @@
 import npyscreen
 
-from UI.Menus.all_classes_form import AllClassesForm
+from UI.Menus.class_menu import AllClassesForm, ClassesToday, PickClass
 from UI.Menus.main_menu import MainMenu
 from UI.Menus.subscription_menu import SubscriptionForm, PostPlanOptionsForm, ClassBundleForm
 from UI.Menus.trainer_menu import TrainerMenuForm, ClassMenuForm
@@ -9,11 +9,11 @@ from UI.Menus.trainer_menu import TrainerMenuForm, ClassMenuForm
 class GymApp(npyscreen.NPSAppManaged):
     def onStart(self):
         # Register Forms
-        # self.addForm('LOGIN', LoginMenu, name="Login")
-        #self.addForm('LOGIN', LoginMenu, name="Login")
         self.addForm('MAIN', MainMenu, name="City Gym Hub")
         self.addForm('SUBSCRIPTION', SubscriptionForm, name="Subscription Plans")
-        self.addForm('ALL_CLASS', AllClassesForm, name="All Classes" )
+        self.addForm('PICK_CLASS', PickClass, name="Pick Class Option")
+        self.addForm('ALL_CLASS', AllClassesForm, name="All Classes")
+        self.addForm('CLASS_TODAY', ClassesToday, name='Classes Today')
         self.addForm('POST_PLAN', PostPlanOptionsForm, name="Post Plan Options")
         self.addForm('CLASS_BUNDLE', ClassBundleForm, name="Class Bundle Options")
         self.addForm('TRAINER', TrainerMenuForm, name="Trainer Menu")

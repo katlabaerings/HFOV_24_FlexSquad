@@ -26,21 +26,13 @@ class ClassLogic:
         return ret_lis
 
 
-    def get_all_classes(self):
-        # try:
-        return self.data.get_all_classesDATA()
-        # except Exception:
-        #     return "no classes found..."
-
     def add_member_to_classLOGIC(self, member_id, class_id):
         return self.write.add_member_to_classDATA(member_id, class_id)
-    
 
     def sign_up_for_a_class(self,class_id : int, member_id : int):
         the_class = self.data.class_by_id(class_id)
         the_class.members.append(member_id)
 
-    
     def get_all_classes(self):
         classes = []
         i = 1
@@ -48,7 +40,6 @@ class ClassLogic:
             classes.append(fitness_class)
             i += 1
         return classes
-
 
     def get_classes_by_trainer(self,trainer_id: int):
         all_classes = self.get_all_classes()

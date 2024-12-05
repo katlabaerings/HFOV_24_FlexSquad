@@ -2,6 +2,7 @@ import npyscreen
 
 from Logic.subscription_logic import get_subscription_plans, get_plan_details
 
+
 class SubscriptionForm(npyscreen.ActionForm):  # Changed to ActionForm
     def create(self):
         # Title
@@ -42,14 +43,14 @@ class SubscriptionForm(npyscreen.ActionForm):  # Changed to ActionForm
     def on_cancel(self):
         self.parentApp.switchForm('MAIN')
 
-class PostPlanOptionsForm(npyscreen.ActionForm):  # Changed to ActionForm
+
+class PostPlanOptionsForm(npyscreen.ActionForm):
     selected_plan = None
 
     def create(self):
         # Title
         self.add(npyscreen.FixedText, value="Plan Options", editable=False, color="STANDOUT")
 
-        # Post-Plan Options
         self.options = self.add(
             npyscreen.TitleSelectOne,
             name="Options",
@@ -57,9 +58,6 @@ class PostPlanOptionsForm(npyscreen.ActionForm):  # Changed to ActionForm
             scroll_exit=True,
             max_height=4
         )
-
-    def update_options(self):
-        pass  # Placeholder for any dynamic updates if needed
 
     def on_ok(self):
         choice = self.options.value
@@ -79,6 +77,7 @@ class PostPlanOptionsForm(npyscreen.ActionForm):  # Changed to ActionForm
 
     def on_cancel(self):
         self.parentApp.switchForm('SUBSCRIPTION')
+
 
 class ClassBundleForm(npyscreen.ActionForm):  # Changed to ActionForm
     def create(self):

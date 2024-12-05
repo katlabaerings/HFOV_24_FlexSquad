@@ -36,22 +36,21 @@ def display_classes_today():
     month = today.month
     day = today.day
     formatted_date = f"{day}.{month}.{year}"
-    all_classes = get_all_classes()
+    all_classes = class_logic.get_all_classes()
+    return_str = []
     for a_class in all_classes:
         locality = False
         if a_class.locality == "L":
             locality = True
         if a_class.date == formatted_date:
-            print(
-                f"""                 {a_class.class_name}
-                 Teached by:{a_class.trainer.firstname}{a_class.trainer.lastname}
-                 Virtual:{locality}
-                 Bookings:{a_class.current_capacity}/{a_class.max_capacity}"""
+            return_str.append(
+                f"{a_class.class_name} Taught by:{a_class.trainer.firstname}{a_class.trainer.lastname} Virtual:{locality} Bookings:{a_class.current_capacity}/{a_class.max_capacity}"
             )
+    return return_str
 
 
 def display_available_classes():
-    all_classes = get_all_classes()
+    all_classes = class_logic.get_all_classes()
     for a_class in all_classes:
         locality = False
         if a_class.locality == "L":
