@@ -26,6 +26,7 @@ def display_classes_today():
     day = today.day
     formatted_date = f"{day}.{month}.{year}"
     all_classes = data.get_all_classes()
+    all_classes = data.get_all_classes()
     return_str = []
     for a_class in all_classes:
         locality = False
