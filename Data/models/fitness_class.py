@@ -12,7 +12,7 @@ class FitnessClass:
     max_capacity: int
     current_capacity: int
     members: str
-    trainer_id: int
+    trainer: int
     time: str
     date: str
     locality: str

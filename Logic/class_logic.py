@@ -26,7 +26,7 @@ class ClassLogic:
         return ret_lis
 
 
-    def get_all_classesLOGIC(self):
+    def get_all_classes(self):
         # try:
         return self.data.get_all_classesDATA()
         # except Exception:

@@ -1,6 +1,6 @@
 import os
 import sys
-from Logic.class_logic import ClassLogic
+from Logic.class_logic import ClassLogic, get_all_classes
 
 """
 # Dynamically add the parent directory to sys.path
@@ -13,31 +13,16 @@ from Logic.class_logic import get_all_classes
 from datetime import datetime
 """
 
-class UIclasses:
-    def __init__(self):
-        self.class_logic = ClassLogic()
 
-
-    def get_all_classesUI(self):
-        return self.class_logic.get_all_classesLOGIC()
-
-    def add_member_to_classUI(self, member_id, class_id):
-        return self.class_logic.add_member_to_classLOGIC(member_id, class_id)
-
-
-    def display_all_classes():
+def display_all_classes():
     all_classes = get_all_classes()
-    return_str = ""
+    return_str = []
     for a_class in all_classes:
         locality = False
         if a_class.locality == "L":
             locality = True
-        
-            return_str += f"               {a_class.class_name} 
-                {a_class.date} At: {a_class.time} 
-                Teached by: {a_class.trainer.firstname} {a_class.trainer.lastname}
-                Virtual:{locality}
-                "
+            
+        return_str.append(f"{a_class.class_name} {a_class.date} At: {a_class.time} Teached by: {a_class.trainer.firstname} {a_class.trainer.lastname} Virtual:{locality}")
     return return_str
         
 
