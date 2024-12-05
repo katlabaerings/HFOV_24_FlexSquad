@@ -7,19 +7,30 @@ class TrainerMenuForm(npyscreen.ActionForm):  # Changed to ActionForm
     def create(self):
         # Title
         self.add(npyscreen.FixedText, value="Trainer Menu", editable=False, color="STANDOUT")
+        self.classes_status = self.add(npyscreen.FixedText, value="", editable=False, color="STANDOUT")
 
-        # Trainer ID Input
-        self.input_field = self.add(
-            npyscreen.TitleText,
-            name="Enter Trainer ID:"
-        )
+    def beforeEditing(self):
+        trainer_id = self.parentApp.user_id
+        if not trainer_id:
+            self.classes_status.value = "Trainer ID is missing. Please log in again."
+            return
 
-    def on_ok(self):  # This method is called when "OK" is pressed
-        trainer_id = self.input_field.value.strip()
+        class_logic = ClassLogic()
+        classes = class_logic.get_classes_by_trainer(trainer_id)
+        if not classes:
+            self.classes_status.value = "No classes found for the given Trainer ID."
+        else:
+            self.classes_status.value = f"{len(classes)} classes found for Trainer ID: {trainer_id}."
+
+        self.display()  
+
+    def on_ok(self):  
+        trainer_id = self.parentApp.user_id
         if not trainer_id:
             npyscreen.notify_confirm("Trainer ID cannot be empty.", title="Error")
             self.parentApp.switchForm('MAIN')
             return
+
         class_logic = ClassLogic()
         classes = class_logic.get_classes_by_trainer(trainer_id)
         if not classes:
@@ -30,7 +41,7 @@ class TrainerMenuForm(npyscreen.ActionForm):  # Changed to ActionForm
         self.parentApp.getForm('CLASS_MENU').set_classes(classes)
         self.parentApp.switchForm('CLASS_MENU')
 
-    def on_cancel(self):  # This method is called when "Cancel" is pressed
+    def on_cancel(self): 
         self.parentApp.switchForm('MAIN')
 
 
