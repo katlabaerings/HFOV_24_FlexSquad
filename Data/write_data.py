@@ -1,6 +1,7 @@
 import csv
 
 from Data.read_data import Data
+from models.fitness_class import FitnessClass
 
 
 #This class is for implementing the user story:"As a gym member

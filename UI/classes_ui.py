@@ -3,7 +3,7 @@ import sys
 from datetime import datetime
 
 from Logic.class_logic import ClassLogic
-
+from Data.read_data import Data
 """
 # Dynamically add the parent directory to sys.path
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -15,10 +15,10 @@ from Logic.class_logic import get_all_classes
 from datetime import datetime
 """
 class_logic = ClassLogic()
-
+data = Data()
 
 def display_all_classes():
-    all_classes = class_logic.get_all_classes()
+    all_classes = data.get_all_classes()
     return_str = []
     for a_class in all_classes:
         locality = False
@@ -36,7 +36,7 @@ def display_classes_today():
     month = today.month
     day = today.day
     formatted_date = f"{day}.{month}.{year}"
-    all_classes = class_logic.get_all_classes()
+    all_classes = data.get_all_classes()
     return_str = []
     for a_class in all_classes:
         locality = False

@@ -2,6 +2,7 @@ import csv
 import os
 from Data.read_data import Data
 from Data.write_data import WriteData
+from models.fitness_class import FitnessClass
 
 
 class ClassLogic:
@@ -11,7 +12,7 @@ class ClassLogic:
 
     #This function is used to implement the user story:"As a gym member I want to be able to 
     #book classes easily through platforms such as an app"
-    def add_member_to_classLOGIC(self, member_id : int, class_id : int)
+    def add_member_to_classLOGIC(self, member_id : int, class_id : int):
         #Calls the appropriate function to sign a member to a certain class.
         return self.write.add_member_to_classDATA(member_id, class_id)
 
