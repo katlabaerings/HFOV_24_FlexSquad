@@ -28,11 +28,8 @@ class TrainerMenuForm(IMenu):
         if not classes:
             self.classes_status.value = "No classes found for the given Trainer ID."
         else:
-            self.classes_status.value = (
-                f"{len(classes)} classes found for Trainer ID: {trainer_id}."
-            )
-
-        self.display()
+            self.classes_status.value = f"{len(classes)} classes found, press ok to see details"
+        self.display()  
 
     def on_ok(self):
         trainer_id = self.parentApp.user_id
@@ -69,8 +66,7 @@ class ClassMenuForm(IMenu):
     def set_classes(self, classes):
         self.fitness_classes = classes
         self.class_menu.values = [
-            f"{cls.class_name} - {cls.time} on {cls.date}"
-            for cls in self.fitness_classes
+            f"{cls.class_name} ({cls.max_capacity}/{cls.current_capacity}) - {cls.time} on {cls.date}" for cls in self.fitness_classes
         ]
         self.class_menu.display()
 

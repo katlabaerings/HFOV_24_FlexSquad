@@ -1,24 +1,24 @@
 import npyscreen
 
-from UI.interfaces.i_menu import IMenu
-from UI.form_enums import Form
-
 
 class MainMenu(IMenu):
     def create(self):
         """Create the main menu UI"""
         self.title = self.add(
-            npyscreen.FixedText,
-            value="Welcome to City Gym Hub - where we are all about the gains!",
-            editable=False,
-            color="STANDOUT",
+            npyscreen.FixedText, 
+            value="Welcome to City Gym Hub - where we are all about the gains!", 
+            editable=False, 
+            color="STANDOUT"
         )
+
         self.user_info = self.add(
             npyscreen.FixedText,
             value="",  # Placeholder for user info
-            editable=False,
-            color="STANDOUT",
+            editable=False, 
+            color="STANDOUT"
         )
+
+        # Menu Options
         self.options = self.add(
             npyscreen.TitleSelectOne,
             name="Options",
@@ -30,7 +30,15 @@ class MainMenu(IMenu):
     def before_editing(self):
         user_id = self.parentApp.user_id
         if user_id:
-            self.user_info.value = f"Your next class (User ID: {user_id} placeholder á eftir að sækja nsæta tíma)"
+            # self.user_info.value = f"Your next class (User ID: {user_id} placeholder á eftir að sækja nsæta tíma)"
+            # call get_next_class
+            class_logic = ClassLogic()
+            class_within_hour = class_logic.is_class_within_next_hour(user_id)
+            if class_within_hour:
+                self.user_info_class_soon.value = f"Coming up: {class_within_hour.class_name} at {class_within_hour.time} !"
+            else:
+                next_class = class_logic.get_next_class(user_id)
+                self.user_info.value = f"{next_class.class_name} at {next_class.time} {next_class.date}"
         else:
             self.user_info.value = "No User ID found. Please log in."
         self.display()

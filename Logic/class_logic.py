@@ -1,3 +1,6 @@
+import csv
+import os
+from datetime import datetime, timedelta
 from Data.read_data import Data
 from Data.write_data import WriteData
 
@@ -27,7 +30,7 @@ class ClassLogic:
         Returns:
             list[FitnessClass]: Returns a list of FitnessClass instances
         """
-        fitness_instructor = Data.manager_by_id(self.data.trainer_id)
+        fitness_instructor = Data().manager_by_id(trainer_id)
         all_classes = self.data.get_all_classes()
         returning_classes = []
         for clas in all_classes:
@@ -45,3 +48,52 @@ class ClassLogic:
             if f_class.locality == "V":
                 v_classes.append(f_class)
         return v_classes
+
+
+    def get_next_class(self, id):
+        current_time = datetime.now()
+        classes = self.data.get_all_classes()
+        next_class = None
+        for f_class in classes:
+            members = f_class.members.split()  # Use dot notation to access attributes
+            if id not in members:
+                continue
+
+            try:
+                class_datetime = datetime.strptime(f"{f_class.date} {f_class.time}", "%d.%m.%Y %H:%M")
+            except ValueError:
+            # Skip classes with invalid dates or times
+                continue
+
+            # Compare to find the next upcoming class
+            if class_datetime > current_time:
+                if next_class is None or class_datetime < datetime.strptime(f"{next_class.date} {next_class.time}", "%d.%m.%Y %H:%M"):
+                    next_class = f_class
+
+        return next_class
+                
+    def is_class_within_next_hour(self, id):
+        current_time = datetime.now()
+        one_hour_later = current_time + timedelta(hours=1)
+        
+        classes = self.data.get_all_classes()
+        for f_class in classes:
+            # Check if the user is in the members list
+            if id not in f_class.members.split():
+                continue
+            
+            try:
+                # Parse the class's date and time into a datetime object
+                class_datetime = datetime.strptime(f"{f_class.date} {f_class.time}", "%d.%m.%Y %H:%M")
+            except ValueError:
+                # Skip classes with invalid dates or times
+                continue
+            
+            # Check if the class is within the next hour
+            if current_time <= class_datetime <= one_hour_later:
+                return f_class  # Return the class if it is within the next hour
+        
+        return None 
+
+    
+
