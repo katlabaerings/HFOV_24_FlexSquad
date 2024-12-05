@@ -26,7 +26,8 @@ def display_all_classes():
             locality = True
 
         return_str.append(
-            f"{a_class.class_name} {a_class.date} At: {a_class.time} Teached by: {a_class.trainer.firstname} {a_class.trainer.lastname} Virtual:{locality}")
+            f"{a_class.class_name} {a_class.date} At: {a_class.time} Taught by: {a_class.trainer.firstname} {a_class.trainer.lastname} Virtual:{locality}"
+        )
     return return_str
 
 
@@ -65,7 +66,8 @@ def display_available_classes():
 """
             )
 
+
 def sign_up_for_a_class():
     display_available_classes()
-    #Get an input from the user for what class we want to sign up to.
+    # Get an input from the user for what class we want to sign up to.
     class_logic.sign_up_for_a_class(member_id, class_id)
