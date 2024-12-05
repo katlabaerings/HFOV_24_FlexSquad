@@ -65,7 +65,12 @@ class WriteData:
 
 
     def update_classes(self,updated_class : FitnessClass) -> None:
-        # Write all rows back to the CSV file, and now with the updated class.
+        """Writes all the classes down to the database, with the updated data.
+
+        Args:
+            updated_class (FitnessClass): Takes in an updated instance of a fitness class.
+
+        """
         all_classes = self.get_all_classes()
         for i, _class in enumerate(all_classes):
             if _class.id == updated_class.id:
