@@ -14,7 +14,9 @@ class LoginMenu(IMenu):
             color="STANDOUT",
         )
 
-        self.input_field = self.add(npyscreen.TitleText, name="Login with you Id:")
+        self.input_field = self.add(
+            npyscreen.TitleText, name="Login with you Id:", color="STANDOUT"
+        )
 
     def on_ok(self):
         user_id = self.input_field.value.strip()

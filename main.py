@@ -2,9 +2,9 @@ import npyscreen
 
 from UI.Menus.class_menu import AllClassesMenu, ClassesTodayMenu, PickClassMenu
 from UI.Menus.subscription_menu import (
-    SubscriptionForm,
-    PostPlanOptionsForm,
-    ClassBundleForm,
+    SubscriptionMenu,
+    PostPlanOptionsMenu,
+    ClassBundleMenu,
 )
 from UI.Menus.trainer_menu import TrainerMenuForm, ClassMenuForm
 from UI.Menus.main_menu import MainMenu
@@ -19,13 +19,13 @@ class GymApp(npyscreen.NPSAppManaged):
         # Register Forms
         self.addForm(Form.LOGIN, LoginMenu, name="City Gym Hub Login")
         self.addForm(Form.MAIN, MainMenu, name="City Gym Hub")
-        self.addForm(Form.SUBSCRIPTION, SubscriptionForm, name="Subscription Plans")
+        self.addForm(Form.SUBSCRIPTION, SubscriptionMenu, name="Subscription Plans")
         self.addForm(Form.PICK_CLASS, PickClassMenu, name="Pick Class Option")
         self.addForm(Form.ALL_CLASS, AllClassesMenu, name="All Classes")
         self.addForm(Form.CLASS_TODAY, ClassesTodayMenu, name="Classes Today")
-        self.addForm(Form.POST_PLAN, PostPlanOptionsForm, name="Post Plan Options")
-        self.addForm(Form.CLASS_BUNDLE, ClassBundleForm, name="Class Bundle Options")
-        self.addForm(Form.TRAINER, TrainerMenuForm, name="Trainer Menu")
+        self.addForm(Form.POST_PLAN, PostPlanOptionsMenu, name="Post Plan Options")
+        self.addForm(Form.CLASS_BUNDLE, ClassBundleMenu, name="Class Bundle Options")
+        self.addForm(Form.TRAINER, TrainerMenuForm, name="View Classes by Trainer")
         self.addForm(Form.CLASS_MENU, ClassMenuForm, name="Class Menu")
 
         self.setNextForm(Form.LOGIN)

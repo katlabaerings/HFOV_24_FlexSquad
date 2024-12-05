@@ -4,11 +4,17 @@ from UI.interfaces.i_menu import IMenu
 from Logic.class_logic import ClassLogic
 from UI.form_enums import Form
 
+DEFAULT_TRAINER_ID = 1
+
 
 class TrainerMenuForm(IMenu):
     def create(self):
-        self.add(
-            npyscreen.FixedText, value="Trainer Menu", editable=False, color="STANDOUT"
+        self.title = self.add(
+            npyscreen.TitleText,
+            name="Enter Trainer ID",
+            value=str(DEFAULT_TRAINER_ID),
+            editable=True,
+            color="STANDOUT",
         )
         self.classes_status = self.add(
             npyscreen.FixedText, value="", editable=False, color="STANDOUT"
@@ -19,6 +25,8 @@ class TrainerMenuForm(IMenu):
         return class_logic.get_classes_by_trainer(trainer_id)
 
     def before_editing(self):
+        self.title.value = str(DEFAULT_TRAINER_ID)
+
         trainer_id = self.parentApp.user_id
         if not trainer_id:
             self.classes_status.value = "Trainer ID is missing. Please log in again."

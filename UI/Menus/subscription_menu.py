@@ -1,19 +1,18 @@
 import npyscreen
 
+from UI.interfaces.i_menu import IMenu
 from Logic.subscription_logic import get_subscription_plans, get_plan_details
 from UI.form_enums import Form
 
 
-class SubscriptionForm(npyscreen.ActionForm):  # Changed to ActionForm
+class SubscriptionMenu(IMenu):
     def create(self):
-        # Title
         self.add(
             npyscreen.FixedText,
             editable=False,
             color="STANDOUT",
         )
 
-        # Subscription Options
         self.plan_options = self.add(
             npyscreen.TitleSelectOne,
             name="Available Plans",
@@ -31,7 +30,7 @@ class SubscriptionForm(npyscreen.ActionForm):  # Changed to ActionForm
         choice = self.plan_options.value
         if not choice:
             npyscreen.notify_confirm(
-                "Please select a plan or press 'Cancel' to go back.",
+                "Please select a plan or press 'Back' to go back.",
                 title="No Selection",
             )
             self.parentApp.switchForm(Form.SUBSCRIPTION)
@@ -52,11 +51,10 @@ class SubscriptionForm(npyscreen.ActionForm):  # Changed to ActionForm
         self.parentApp.switchForm(Form.MAIN)
 
 
-class PostPlanOptionsForm(npyscreen.ActionForm):
+class PostPlanOptionsMenu(IMenu):
     selected_plan = None
 
     def create(self):
-        # Title
         self.add(
             npyscreen.FixedText, value="Plan Options", editable=False, color="STANDOUT"
         )
@@ -73,7 +71,7 @@ class PostPlanOptionsForm(npyscreen.ActionForm):
         choice = self.options.value
         if not choice:
             npyscreen.notify_confirm(
-                "Please select an option or press 'Cancel' to go back.",
+                "Please select an option or press 'Back' to go back.",
                 title="No Selection",
             )
             self.parentApp.switchForm(Form.POST_PLAN)
@@ -94,9 +92,8 @@ class PostPlanOptionsForm(npyscreen.ActionForm):
         self.parentApp.switchForm(Form.SUBSCRIPTION)
 
 
-class ClassBundleForm(npyscreen.ActionForm):  # Changed to ActionForm
+class ClassBundleMenu(IMenu):
     def create(self):
-        # Title
         self.add(
             npyscreen.FixedText,
             value="Class Bundle Options",
@@ -104,7 +101,6 @@ class ClassBundleForm(npyscreen.ActionForm):  # Changed to ActionForm
             color="STANDOUT",
         )
 
-        # Bundle Options
         self.bundle_options = self.add(
             npyscreen.TitleSelectOne,
             name="Bundle Options",
@@ -126,7 +122,7 @@ class ClassBundleForm(npyscreen.ActionForm):  # Changed to ActionForm
         choice = self.bundle_options.value
         if not choice:
             npyscreen.notify_confirm(
-                "Please select a bundle or press 'Cancel' to go back.",
+                "Please select a bundle or press 'Back' to go back.",
                 title="No Selection",
             )
             self.parentApp.switchForm(Form.CLASS_BUNDLE)

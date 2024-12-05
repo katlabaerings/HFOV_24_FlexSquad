@@ -51,7 +51,7 @@ class PickClassMenu(IMenu):
         choice = self.options.value
         if not choice:
             npyscreen.notify_confirm(
-                "Please select an option or press 'Cancel' to go back.",
+                "Please select an option or press 'Back' to go back.",
                 title="No Selection",
             )
             return

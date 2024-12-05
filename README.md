@@ -16,9 +16,9 @@ We implemented the following User Stories as independent functions:
 - US4: As a fitness instructor I want to see how many members are attending my class so that I can be better prepared for each class
 - US5: As a manager I want an overview of class attendance to understand class popularity
 
-Initially, we interpreted that each User Story could be implemented as an independent function.during the feedback session with Shalini, we were informed that the program should run as a cohesive, integrated unit.
+Initially, we interpreted that each User Story could be implemented as an independent function. During the feedback session with Shalini, we were informed that the program should run as a cohesive, integrated unit.
 
-As a result, in **Sprint 2**, we focused on connecting all the independent functions into a unified program with a user interface (UI).
+As a result, in **Sprint 2**, we focus on connecting all the independent functions into a unified program with a user interface (UI).
 
 ---
 
