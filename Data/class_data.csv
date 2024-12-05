@@ -1,3 +1,7 @@
 id,class_name,max_capacity,current_capacity,members,trainer_id,time,date,locality,link
 1,Moonwalking competition,50,2,5|6,3,12:30,12.12.2012,V,https://www.youtube.com/watch?v=dQw4w9WgXcQ
 2,Alpha male joe rogan lifting of war,3,0,?,4,13:00,10.10.1023,L,None
+3,SportHiit,50,2,5|6,3,12:30,12.12.2012,V,https://www.youtube.com/watch?v=dQw4w9WgXcQ
+4,Pilates,20,0,?,4,13:00,10.10.1023,L,None
+5,Spining,50,2,5|6,3,12:30,12.12.2012,V,https://www.youtube.com/watch?v=dQw4w9WgXcQ
+6,Hot Yoga,40,0,?,4,13:00,10.10.1023,L,None
