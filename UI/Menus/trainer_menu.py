@@ -1,10 +1,8 @@
 import npyscreen
 
 from UI.interfaces.i_menu import IMenu
-from Logic.class_logic import ClassLogic
 from UI.form_enums import Form
-
-DEFAULT_TRAINER_ID = 1
+from Logic.class_logic import ClassLogic
 
 
 class TrainerMenuForm(IMenu):
@@ -12,7 +10,7 @@ class TrainerMenuForm(IMenu):
         self.title = self.add(
             npyscreen.TitleText,
             name="Enter Trainer ID",
-            value=str(DEFAULT_TRAINER_ID),
+            value="",
             editable=True,
             color="STANDOUT",
         )
@@ -25,8 +23,7 @@ class TrainerMenuForm(IMenu):
         return class_logic.get_classes_by_trainer(trainer_id)
 
     def before_editing(self):
-        self.title.value = str(DEFAULT_TRAINER_ID)
-        trainer_id = int(self.title.value)
+        trainer_id = self.parentApp.user_id
         if not trainer_id:
             self.classes_status.value = "Trainer ID is missing. Please log in again."
             return
@@ -35,8 +32,10 @@ class TrainerMenuForm(IMenu):
         if not classes:
             self.classes_status.value = "No classes found for the given Trainer ID."
         else:
-            self.classes_status.value = f"{len(classes)} classes found, press ok to see details"
-        self.display()  
+            self.classes_status.value = (
+                f"{len(classes)} classes found, press ok to see details"
+            )
+        self.display()
 
     def on_ok(self):
         trainer_id = int(self.title.value.strip())
@@ -60,7 +59,7 @@ class TrainerMenuForm(IMenu):
         self.parentApp.switchForm(Form.MAIN)
 
 
-class ClassMenuForm(IMenu):
+class ClassMenuForm(npyscreen.ActionForm):
     def create(self):
         # Title
         self.add(npyscreen.FixedText, value="Classes", editable=False, color="STANDOUT")
@@ -73,7 +72,8 @@ class ClassMenuForm(IMenu):
     def set_classes(self, classes):
         self.fitness_classes = classes
         self.class_menu.values = [
-            f"{cls.class_name} ({cls.max_capacity}/{cls.current_capacity}) - {cls.time} on {cls.date}" for cls in self.fitness_classes
+            f"{cls.class_name} ({cls.max_capacity}/{cls.current_capacity}) - {cls.time} on {cls.date}"
+            for cls in self.fitness_classes
         ]
         self.class_menu.display()
 
