@@ -92,32 +92,20 @@ class Data:
                     classes.append(FitnessClass(row))
             return classes
 
-    def get_all_classesDATA(self):
+    def get_all_classes(self) -> list[FitnessClass]:
+        """Opens and reads through the class database, makes instances of FitnessClasses and
+        adds to a list. Returns the list.
+
+        Returns:
+            list[FitnessClass]: Returns a list of instances of the FitnessClass model class. If there
+            are no FitnessClasses in the database it will return an empty list.
+        """
         all_classes = []
-        with open(self.CLASS_FILE_PATH, newline='', encoding='utf-8') as csvfile:
-            reader = csv.DictReader(csvfile)
-            for row in reader:
-                all_classes.append(row)
-
-        # Generate ASCII table
-        headers = ["ID", "Class Name", "Max Capacity", "Current Capacity",
-                   "Members", "Trainer", "Time", "Date", "Locality", "Link"]
-        table_data = [
-            [r
-                row['id'],
-                row['class_name'],
-                row['max_capacity'],
-                row['current_capacity'],
-                row['members'],
-                self.manager_by_id(row['trainer_id']).firstname if hasattr(self.manager_by_id(row['trainer_id']),
-                                                                           'firstname') else "Trainer not found",
-                row['time'],
-                row['date'],
-                "Virtual" if row['locality'] == "V" else "Local" if row['locality'] == "L" else row['locality'],
-                row['link']
-            ]
-
-            for row in all_classes
-        ]
-        table = tabulate(table_data, headers=headers, tablefmt="fancy_grid")
-        return table
+        with open(self.CLASS_FILE_PATH, mode="r") as file:
+            csv_reader = csv.DictReader(file)
+            for row in csv_reader:
+                row["trainer"] = self.manager_by_id(row["trainer_id"])
+                del row["trainer_id"]
+                all_classes.append(FitnessClass(**row))
+        return all_classes
+         

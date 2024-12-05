@@ -12,3 +12,4 @@ class FitnessClass:
     date: str
     locality: str
     link: str
+
