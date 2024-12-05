@@ -42,13 +42,4 @@ class Data:
                     return Manager(**row)
 
         return False
-    
-    def classes_by_emp_id(self, emp_id):
-        with open(self.CLASS_FILE_PATH, mode="r") as file:
-            csv_reader = csv.DictReader(file)
-            classes = []
-            for row in csv_reader:
-                if row["trainer_id"] == str(emp_id):
-                    classes.append(FitnessClass(row))
-            return classes
 
