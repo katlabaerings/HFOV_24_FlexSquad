@@ -31,7 +31,7 @@ class ClassLogic:
         Returns:
             list[FitnessClass]: Returns a list of FitnessClass instances
         """
-        fitness_instructor = manager_by_id(self.data.trainer_id)
+        fitness_instructor = Data().manager_by_id(trainer_id)
         all_classes = self.data.get_all_classes()
         returning_classes = []
         for clas in all_classes:
