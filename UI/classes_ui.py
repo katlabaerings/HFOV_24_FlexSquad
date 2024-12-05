@@ -1,5 +1,7 @@
 import os
 import sys
+from datetime import datetime
+
 from Logic.class_logic import ClassLogic, get_all_classes
 
 """
@@ -21,18 +23,44 @@ def display_all_classes():
         locality = False
         if a_class.locality == "L":
             locality = True
-            
-        return_str.append(f"{a_class.class_name} {a_class.date} At: {a_class.time} Teached by: {a_class.trainer.firstname} {a_class.trainer.lastname} Virtual:{locality}")
+
+        return_str.append(
+            f"{a_class.class_name} {a_class.date} At: {a_class.time} Teached by: {a_class.trainer.firstname} {a_class.trainer.lastname} Virtual:{locality}")
     return return_str
-        
 
 
-'''
-if __name__ == "__main__":
-    display_all_classes()
-    print("")
-    print("")
-    display_classes_today()
-    print("Available classes:")
-    display_available_classes()
-'''
+def display_classes_today():
+    today = datetime.today()
+    year = today.year
+    month = today.month
+    day = today.day
+    formatted_date = f"{day}.{month}.{year}"
+    all_classes = get_all_classes()
+    for a_class in all_classes:
+        locality = False
+        if a_class.locality == "L":
+            locality = True
+        if a_class.date == formatted_date:
+            print(
+                f"""                 {a_class.class_name}
+                 Teached by:{a_class.trainer.firstname}{a_class.trainer.lastname}
+                 Virtual:{locality}
+                 Bookings:{a_class.current_capacity}/{a_class.max_capacity}"""
+            )
+
+
+def display_available_classes():
+    all_classes = get_all_classes()
+    for a_class in all_classes:
+        locality = False
+        if a_class.locality == "L":
+            locality = True
+        if int(a_class.max_capacity) > int(a_class.current_capacity):
+            print(
+                f"""                {a_class.class_name} 
+                {a_class.date} At: {a_class.time} 
+                Teached by: {a_class.trainer.firstname} {a_class.trainer.lastname}
+                Virtual:{locality}
+                Bookings:{a_class.current_capacity}/{a_class.max_capacity}
+"""
+            )
