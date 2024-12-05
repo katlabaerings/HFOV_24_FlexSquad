@@ -72,25 +72,6 @@ class Data:
 
         return False
 
-    def classes_by_emp_id(self, emp_id : int) -> list[FitnessClass]:
-        """Takes in an id of the fitness_instructor, and returns a list of instances
-        of FitnessClasses. All the FitnessClasses in the list are instructed by the 
-        fitness instructor.
-
-        Args:
-            emp_id (int): An integer representing the id of the trainer.
-
-        Returns:
-            list[FitnessClass]: Returns a list of FitnessClass instances, or an empty list if 
-            the fitness instructor is not teaching any fitness classes.
-        """
-        with open(self.CLASS_FILE_PATH, mode="r") as file:
-            csv_reader = csv.DictReader(file)
-            classes = []
-            for row in csv_reader:
-                if row["trainer_id"] == str(emp_id):
-                    classes.append(FitnessClass(row))
-            return classes
 
     def get_all_classes(self) -> list[FitnessClass]:
         """Opens and reads through the class database, makes instances of FitnessClasses and
