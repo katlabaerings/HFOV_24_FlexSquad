@@ -9,7 +9,7 @@ from UI.Menus.trainer_menu import TrainerMenuForm, ClassMenuForm
 class GymApp(npyscreen.NPSAppManaged):
     def onStart(self):
         # Register Forms
-        self.addForm('LOGIN', LoginMenu, name="Login")
+        #self.addForm('LOGIN', LoginMenu, name="Login")
         self.addForm('MAIN', MainMenu, name="City Gym Hub")
         self.addForm('SUBSCRIPTION', SubscriptionForm, name="Subscription Plans")
         self.addForm('ALL_CLASS', AllClassesForm, name="All Classes" )
