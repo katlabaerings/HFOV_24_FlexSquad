@@ -1,10 +1,5 @@
 from dataclasses import dataclass
 
-from numpy import character
-
-from Data.models.manager import Manager
-
-
 @dataclass
 class FitnessClass:
     id: int
