@@ -1,12 +1,12 @@
 import npyscreen
 
+from UI.interfaces.i_menu import IMenu
 from Logic.class_logic import ClassLogic
 from UI.form_enums import Form
 
 
-class TrainerMenuForm(npyscreen.ActionForm):  # Changed to ActionForm
+class TrainerMenuForm(IMenu):
     def create(self):
-        # Title
         self.add(
             npyscreen.FixedText, value="Trainer Menu", editable=False, color="STANDOUT"
         )
@@ -14,14 +14,17 @@ class TrainerMenuForm(npyscreen.ActionForm):  # Changed to ActionForm
             npyscreen.FixedText, value="", editable=False, color="STANDOUT"
         )
 
-    def beforeEditing(self):
+    def fetch_classes(self, trainer_id):
+        class_logic = ClassLogic()
+        return class_logic.get_classes_by_trainer(trainer_id)
+
+    def before_editing(self):
         trainer_id = self.parentApp.user_id
         if not trainer_id:
             self.classes_status.value = "Trainer ID is missing. Please log in again."
             return
 
-        class_logic = ClassLogic()
-        classes = class_logic.get_classes_by_trainer(trainer_id)
+        classes = self.fetch_classes(trainer_id)
         if not classes:
             self.classes_status.value = "No classes found for the given Trainer ID."
         else:
@@ -38,8 +41,7 @@ class TrainerMenuForm(npyscreen.ActionForm):  # Changed to ActionForm
             self.parentApp.switchForm(Form.MAIN)
             return
 
-        class_logic = ClassLogic()
-        classes = class_logic.get_classes_by_trainer(trainer_id)
+        classes = self.get_classes_by_trainer(trainer_id)
         if not classes:
             npyscreen.notify_confirm(
                 "No classes found for the given Trainer ID.", title="Error"
@@ -47,14 +49,14 @@ class TrainerMenuForm(npyscreen.ActionForm):  # Changed to ActionForm
             self.parentApp.switchForm(Form.MAIN)
             return
 
-        self.parentApp.getForm("CLASS_MENU").set_classes(classes)
-        self.parentApp.switchForm("CLASS_MENU")
+        self.parentApp.getForm(Form.CLASS_MENU).set_classes(classes)
+        self.parentApp.switchForm(Form.CLASS_MENU)
 
     def on_cancel(self):
         self.parentApp.switchForm(Form.MAIN)
 
 
-class ClassMenuForm(npyscreen.ActionForm):  # Optionally change to ActionForm
+class ClassMenuForm(IMenu):
     def create(self):
         # Title
         self.add(npyscreen.FixedText, value="Classes", editable=False, color="STANDOUT")

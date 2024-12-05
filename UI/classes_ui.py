@@ -60,7 +60,7 @@ def display_available_classes():
             print(
                 f"""                {a_class.class_name} 
                 {a_class.date} At: {a_class.time} 
-                Teached by: {a_class.trainer.firstname} {a_class.trainer.lastname}
+                Taught by: {a_class.trainer.firstname} {a_class.trainer.lastname}
                 Virtual:{locality}
                 Bookings:{a_class.current_capacity}/{a_class.max_capacity}
 """

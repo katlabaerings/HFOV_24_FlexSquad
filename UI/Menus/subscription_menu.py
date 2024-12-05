@@ -1,6 +1,7 @@
 import npyscreen
 
 from Logic.subscription_logic import get_subscription_plans, get_plan_details
+from UI.form_enums import Form
 
 
 class SubscriptionForm(npyscreen.ActionForm):  # Changed to ActionForm
@@ -41,15 +42,15 @@ class SubscriptionForm(npyscreen.ActionForm):  # Changed to ActionForm
         npyscreen.notify_confirm(details, title=f"Plan Details: {selected_plan}")
 
         if selected_plan == "Class Bundle":
-            self.parentApp.getForm("CLASS_BUNDLE").update_bundle_options()
-            self.parentApp.switchForm("CLASS_BUNDLE")
+            self.parentApp.getForm(Form.CLASS_BUNDLE).update_bundle_options()
+            self.parentApp.switchForm(Form.CLASS_BUNDLE)
         else:
-            self.parentApp.getForm("POST_PLAN").selected_plan = selected_plan
-            self.parentApp.getForm("POST_PLAN").update_options()
-            self.parentApp.switchForm("POST_PLAN")
+            self.parentApp.getForm(Form.POST_PLAN).selected_plan = selected_plan
+            self.parentApp.getForm(Form.POST_PLAN).update_options()
+            self.parentApp.switchForm(Form.POST_PLAN)
 
     def on_cancel(self):
-        self.parentApp.switchForm("MAIN")
+        self.parentApp.switchForm(Form.MAIN)
 
 
 class PostPlanOptionsForm(npyscreen.ActionForm):
@@ -76,7 +77,7 @@ class PostPlanOptionsForm(npyscreen.ActionForm):
                 "Please select an option or press 'Cancel' to go back.",
                 title="No Selection",
             )
-            self.parentApp.switchForm("POST_PLAN")
+            self.parentApp.switchForm(Form.POST_PLAN)
             return
         selected = choice[0]
         if selected == 0:
@@ -84,7 +85,7 @@ class PostPlanOptionsForm(npyscreen.ActionForm):
                 f"Thank you for choosing to buy the {self.selected_plan}!",
                 title="Purchase Successful",
             )
-            self.parentApp.switchForm("MAIN")
+            self.parentApp.switchForm(Form.MAIN)
         elif selected == 1:
             self.parentApp.switchForm(Form.SUBSCRIPTION)
         elif selected == 2:
@@ -129,7 +130,7 @@ class ClassBundleForm(npyscreen.ActionForm):  # Changed to ActionForm
                 "Please select a bundle or press 'Cancel' to go back.",
                 title="No Selection",
             )
-            self.parentApp.switchForm("CLASS_BUNDLE")
+            self.parentApp.switchForm(Form.CLASS_BUNDLE)
             return
         selected = choice[0]
         if selected in [0, 1, 2]:
@@ -139,7 +140,7 @@ class ClassBundleForm(npyscreen.ActionForm):  # Changed to ActionForm
                 f"Thank you for purchasing the {num_classes}-Class Bundle!",
                 title="Purchase Successful",
             )
-            self.parentApp.switchForm("MAIN")
+            self.parentApp.switchForm(Form.MAIN)
         elif selected == 3:
             self.parentApp.switchForm(Form.SUBSCRIPTION)
         elif selected == 4:

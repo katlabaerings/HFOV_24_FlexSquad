@@ -8,10 +8,10 @@ from Data.read_data import Data
 class WriteData:
     def __init__(self):
         self.data = Data()
-        self.CLASS_FILE_PATH = "../Data/class_data.csv"
-        self.MANAGER_FILE_PATH = "../Data/manager_data.csv"
-        self.MEMBER_FILE_PATH = "../Data/member_data.csv"
-        self.SUBSCRIPTION_FILE_PATH = "../Data/subscription_data.csv"
+        self.CLASS_FILE_PATH = "../Data/db/class_data.csv"
+        self.MANAGER_FILE_PATH = "../Data/db/manager_data.csv"
+        self.MEMBER_FILE_PATH = "../Data/db/member_data.csv"
+        self.SUBSCRIPTION_FILE_PATH = "../Data/db/subscription_data.csv"
 
     def add_member_to_classDATA(self, member_id: int, class_id: int):
         try:

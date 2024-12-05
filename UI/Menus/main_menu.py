@@ -1,10 +1,12 @@
 import npyscreen
+
+from UI.interfaces.i_menu import IMenu
 from UI.form_enums import Form
 
 
-class MainMenu(npyscreen.ActionForm):
+class MainMenu(IMenu):
     def create(self):
-        # Title
+        """Create the main menu UI"""
         self.title = self.add(
             npyscreen.FixedText,
             value="Welcome to City Gym Hub - where we are all about the gains!",
@@ -17,8 +19,6 @@ class MainMenu(npyscreen.ActionForm):
             editable=False,
             color="STANDOUT",
         )
-
-        # Menu Options
         self.options = self.add(
             npyscreen.TitleSelectOne,
             name="Options",
@@ -27,33 +27,32 @@ class MainMenu(npyscreen.ActionForm):
             max_height=6,
         )
 
-    def beforeEditing(self):
-        # Dynamically update user info before the form is displayed
+    def before_editing(self):
         user_id = self.parentApp.user_id
         if user_id:
             self.user_info.value = f"Your next class (User ID: {user_id} placeholder á eftir að sækja nsæta tíma)"
         else:
             self.user_info.value = "No User ID found. Please log in."
-        self.display()  # Refresh the screen to show updated info
+        self.display()
 
     def on_ok(self):
         if self.options.value is not None and len(self.options.value) > 0:
             selected = self.options.value[0]
             if selected == 0:
-                self.parentApp.getForm("SUBSCRIPTION").update_subscription()
-                self.parentApp.switchForm("SUBSCRIPTION")
+                self.parentApp.getForm(Form.SUBSCRIPTION).update_subscription()
+                self.parentApp.switchForm(Form.SUBSCRIPTION)
             elif selected == 1:
                 npyscreen.notify_confirm("Feature coming soon!", title="Book a Class")
-                self.parentApp.switchForm("MAIN")
+                self.parentApp.switchForm(Form.MAIN)
             elif selected == 2:
-                self.parentApp.switchForm("PICK_CLASS")
+                self.parentApp.switchForm(Form.PICK_CLASS)
             elif selected == 3:
                 self.parentApp.setNextForm(None)
         else:
             npyscreen.notify_confirm(
                 "Please select an option to proceed.", title="Error"
             )
-            self.parentApp.switchForm("MAIN")
+            self.parentApp.switchForm(Form.MAIN)
 
-    def on_cancel(self):  # This method is called when "Cancel" is pressed
+    def on_cancel(self):
         self.parentApp.setNextForm(None)

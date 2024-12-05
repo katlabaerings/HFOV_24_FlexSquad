@@ -1,29 +1,31 @@
 import npyscreen
 
+from UI.interfaces.i_menu import IMenu
 from UI.classes_ui import display_all_classes, display_classes_today
 from UI.form_enums import Form
 
 
-class AllClassesForm(npyscreen.ActionForm):
+class AllClassesMenu(IMenu):
     def create(self):
         classes_string = display_all_classes()
         for class_str in classes_string:
             self.add(npyscreen.TitleFixedText, name=class_str)
 
     def on_ok(self):
-        self.parentApp(Form.MAIN)
+        self.parentApp.switchForm(Form.MAIN)
 
     def on_cancel(self):
         self.parentApp.switchForm(Form.MAIN)
 
 
-class ClassesToday(npyscreen.ActionForm):
+class ClassesTodayMenu(IMenu):
     def create(self):
         classes = display_classes_today()
         for class_str in classes:
             self.add(npyscreen.TitleFixedText, name=class_str)
         if not classes:
             self.add(npyscreen.TitleText, name="There are no classes for today!")
+            return
 
     def on_ok(self):
         self.parentApp.switchForm(Form.MAIN)
@@ -32,7 +34,7 @@ class ClassesToday(npyscreen.ActionForm):
         self.parentApp.switchForm(Form.MAIN)
 
 
-class PickClass(npyscreen.ActionForm):
+class PickClassMenu(IMenu):
     def create(self):
         self.add(
             npyscreen.FixedText, value="Plan Options", editable=False, color="STANDOUT"
@@ -54,6 +56,7 @@ class PickClass(npyscreen.ActionForm):
                 "Please select an option or press 'Cancel' to go back.",
                 title="No Selection",
             )
+            return
 
         selected = choice[0]
         if selected == 0:
