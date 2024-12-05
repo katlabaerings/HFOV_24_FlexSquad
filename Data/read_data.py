@@ -7,10 +7,10 @@ from Data.models.fitness_class import FitnessClass
 
 
 class Data:
-    CLASS_FILE_PATH = "../Data/class_data.csv"
-    MANAGER_FILE_PATH = "../Data/manager_data.csv"
-    MEMBER_FILE_PATH = "../Data/member_data.csv"
-    SUBSCRIPTION_FILE_PATH = "../Data/subscription_data.csv"
+    CLASS_FILE_PATH = "./Data/class_data.csv"
+    MANAGER_FILE_PATH = "./Data/manager_data.csv"
+    MEMBER_FILE_PATH = "./Data/member_data.csv"
+    SUBSCRIPTION_FILE_PATH = "./Data/subscription_data.csv"
 
     def __init__(self):
         pass
