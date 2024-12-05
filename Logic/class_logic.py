@@ -36,7 +36,7 @@ class ClassLogic:
 
         all_classes = self.read.get_all_classes()
         returning_classes = [
-            t_class for t_class in all_classes if int(t_class.trainer_id) == trainer.id
+            t_class for t_class in all_classes if t_class.trainer_id == trainer.id
         ]
 
         return returning_classes
