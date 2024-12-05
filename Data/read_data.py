@@ -6,7 +6,7 @@ from Data.models.member import Member
 from Data.models.fitness_class import FitnessClass
 
 
-class Data:
+class ReadData:
     CLASS_FILE_PATH = "./Data/db/class_data.csv"
     MANAGER_FILE_PATH = "./Data/db/manager_data.csv"
     MEMBER_FILE_PATH = "./Data/db/member_data.csv"
@@ -66,7 +66,7 @@ class Data:
         with open(self.MANAGER_FILE_PATH, mode="r") as file:
             csv_reader = csv.DictReader(file)
             for row in csv_reader:
-                if row["id"] == str(id):  # Compare as string
+                if row["id"] == str(id):
                     return Manager(**row)
 
         return False
@@ -83,7 +83,7 @@ class Data:
         with open(self.CLASS_FILE_PATH, mode="r") as file:
             csv_reader = csv.DictReader(file)
             for row in csv_reader:
-                row["trainer"] = self.manager_by_id(row["trainer_id"])
-                del row["trainer_id"]
+                row["trainer_id"] = self.manager_by_id(row["trainer_id"])
+                # del row["trainer_id"]
                 all_classes.append(FitnessClass(**row))
         return all_classes

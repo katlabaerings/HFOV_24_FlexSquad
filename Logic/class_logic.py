@@ -1,4 +1,4 @@
-from Data.read_data import Data
+from Data.read_data import ReadData
 from Data.write_data import WriteData
 
 from Data.models.fitness_class import FitnessClass
@@ -6,7 +6,7 @@ from Data.models.fitness_class import FitnessClass
 
 class ClassLogic:
     def __init__(self):
-        self.data = Data()
+        self.read = ReadData()
         self.write = WriteData()
 
     # This function is used to implement the user story:"As a gym member I want to be able to
@@ -27,19 +27,24 @@ class ClassLogic:
         Returns:
             list[FitnessClass]: Returns a list of FitnessClass instances
         """
-        fitness_instructor = Data.manager_by_id(self.data.trainer_id)
-        all_classes = self.data.get_all_classes()
-        returning_classes = []
-        for clas in all_classes:
-            if clas.trainer.id == fitness_instructor.id:
-                returning_classes.append(clas)
+        trainer = self.read.manager_by_id(trainer_id)
+
+        # check to make sure if the manager exists, that it is of type 'trainer'
+        if not trainer or trainer.type.lower() != "trainer":
+            return []
+
+        all_classes = self.read.get_all_classes()
+        returning_classes = [
+            t_class for t_class in all_classes if int(t_class.trainer_id) == trainer.id
+        ]
+
         return returning_classes
 
-    # This function is for the userstory "As a gym member, I want to be able to attend virtual classes,
+    # This function is for the user story "As a gym member, I want to be able to attend virtual classes,
     # so I can keep working on my health and well-being, even though I can’t physically be there"
     # This function filters out all the classes that are virtual and returns a list of them.
     def get_virtual_classes(self):
-        classes = self.data.get_all_classes()
+        classes = self.read.get_all_classes()
         v_classes = []
         for f_class in classes:
             if f_class.locality == "V":

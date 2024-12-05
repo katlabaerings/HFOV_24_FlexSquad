@@ -1,5 +1,5 @@
 id,firstname,lastname,email,type
 1,Harvey,Specter,harvey@citygym.com,admin
 2,Mike,Ross,mike@citygym.com,admin
-3,Donna,Paulsen,donna@citygym.com,instructor
-4,Jane,Doe,jane@citygym.com,instructor
+3,Donna,Paulsen,donna@citygym.com,trainer
+4,Jane,Doe,jane@citygym.com,trainer

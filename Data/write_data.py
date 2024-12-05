@@ -1,6 +1,6 @@
 import csv
 
-from Data.read_data import Data
+from Data.read_data import ReadData
 from Data.models.fitness_class import FitnessClass
 
 
@@ -8,7 +8,7 @@ from Data.models.fitness_class import FitnessClass
 # I want to be able to book classes easily through platforms such as an app."
 class WriteData:
     def __init__(self):
-        self.data = Data()
+        self.data = ReadData()
         self.CLASS_FILE_PATH = "../Data/db/class_data.csv"
         self.MANAGER_FILE_PATH = "../Data/db/manager_data.csv"
         self.MEMBER_FILE_PATH = "../Data/db/member_data.csv"

@@ -26,8 +26,7 @@ class TrainerMenuForm(IMenu):
 
     def before_editing(self):
         self.title.value = str(DEFAULT_TRAINER_ID)
-
-        trainer_id = self.parentApp.user_id
+        trainer_id = int(self.title.value)
         if not trainer_id:
             self.classes_status.value = "Trainer ID is missing. Please log in again."
             return
@@ -43,13 +42,13 @@ class TrainerMenuForm(IMenu):
         self.display()
 
     def on_ok(self):
-        trainer_id = self.parentApp.user_id
+        trainer_id = int(self.title.value.strip())
         if not trainer_id:
             npyscreen.notify_confirm("Trainer ID cannot be empty.", title="Error")
             self.parentApp.switchForm(Form.MAIN)
             return
 
-        classes = self.get_classes_by_trainer(trainer_id)
+        classes = self.fetch_classes(trainer_id)
         if not classes:
             npyscreen.notify_confirm(
                 "No classes found for the given Trainer ID.", title="Error"

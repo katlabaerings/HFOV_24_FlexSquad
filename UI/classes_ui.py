@@ -1,8 +1,8 @@
 from datetime import datetime
-from Data.read_data import Data
+from Data.read_data import ReadData
 
 
-data = Data()
+data = ReadData()
 
 
 def display_all_classes():
@@ -14,7 +14,7 @@ def display_all_classes():
             locality = True
 
         return_str.append(
-            f"{a_class.class_name} {a_class.date} At: {a_class.time} Taught by: {a_class.trainer.firstname} {a_class.trainer.lastname} Virtual:{locality}"
+            f"{a_class.class_name} {a_class.date} At: {a_class.time} Taught by: {a_class.trainer_id.firstname} {a_class.trainer_id.lastname} Virtual:{locality}"
         )
     return return_str
 
@@ -34,7 +34,7 @@ def display_classes_today():
             locality = True
         if a_class.date == formatted_date:
             return_str.append(
-                f"{a_class.class_name} Taught by:{a_class.trainer.firstname}{a_class.trainer.lastname} Virtual:{locality} Bookings:{a_class.current_capacity}/{a_class.max_capacity}"
+                f"{a_class.class_name} Taught by:{a_class.trainer_id.firstname}{a_class.trainer_id.lastname} Virtual:{locality} Bookings:{a_class.current_capacity}/{a_class.max_capacity}"
             )
     return return_str
 
@@ -49,7 +49,7 @@ def display_available_classes():
             print(
                 f"""                {a_class.class_name} 
                 {a_class.date} At: {a_class.time} 
-                Taught by: {a_class.trainer.firstname} {a_class.trainer.lastname}
+                Taught by: {a_class.trainer_id.firstname} {a_class.trainer_id.lastname}
                 Virtual:{locality}
                 Bookings:{a_class.current_capacity}/{a_class.max_capacity}
 """
