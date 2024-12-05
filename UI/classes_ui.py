@@ -30,10 +30,6 @@ def display_all_classes():
     return return_str
 
 
-
-        
-
-
 def display_classes_today():
     today = datetime.today()
     year = today.year
