@@ -27,6 +27,13 @@ def display_all_classes():
         return_str.append(
             f"{a_class.class_name} {a_class.date} At: {a_class.time} Teached by: {a_class.trainer.firstname} {a_class.trainer.lastname} Virtual:{locality}")
     return return_str
+<<<<<<< Updated upstream
+=======
+
+
+
+        
+>>>>>>> Stashed changes
 
 
 def display_classes_today():

@@ -34,6 +34,11 @@ class ClassLogic:
 
     def add_member_to_classLOGIC(self, member_id, class_id):
         return self.write.add_member_to_classDATA(member_id, class_id)
+    
+
+    def sign_up_for_a_class(self,class_id : int, member_id : int):
+        the_class = self.data.class_by_id(class_id)
+        the_class.members.append(member_id)
 
 
 
@@ -64,4 +69,7 @@ def get_virtual_classes():
         if f_class.locality == 'V':
             v_classes.append(f_class)
     return v_classes
+
+
+
 
