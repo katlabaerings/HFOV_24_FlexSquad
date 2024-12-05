@@ -6,6 +6,8 @@ class MainMenu(npyscreen.ActionForm):
         # Title
         self.add(npyscreen.FixedText, value="Welcome to City Gym Hub - where we are all about the gains!",
                  editable=False, color="STANDOUT")
+        self.add(npyscreen.FixedText, value="Your next class",
+                        editable=False, color="STANDOUT")
 
         # Menu Options
         self.options = self.add(

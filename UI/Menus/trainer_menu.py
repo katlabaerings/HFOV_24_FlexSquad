@@ -15,7 +15,7 @@ class TrainerMenuForm(npyscreen.ActionForm):  # Changed to ActionForm
         )
 
     def on_ok(self):  # This method is called when "OK" is pressed
-        trainer_id = self.input_field.value.strip()
+        trainer_id = self.parentApp.user_id
         if not trainer_id:
             npyscreen.notify_confirm("Trainer ID cannot be empty.", title="Error")
             self.parentApp.switchForm('MAIN')
