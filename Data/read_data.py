@@ -20,7 +20,8 @@ class Data:
             csv_reader = csv.DictReader(file)
             for row in csv_reader:
                 if row["id"] == str(id):
-                    row["trainer"] = self.manager_by_id(row["trainer_id"])
+
+                    row["trainer_id"] = self.manager_by_id(row["trainer_id"])
                     del row["trainer_id"]
                     return FitnessClass(**row)
                 else:
