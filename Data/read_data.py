@@ -1,18 +1,17 @@
 import csv
 from tabulate import tabulate
 import typing
-from models.manager import Manager
-from models.member import Member
-from models.fitness_class import FitnessClass
+from Data.models.manager import Manager
+from Data.models.member import Member
+from Data.models.fitness_class import FitnessClass
 
 
 class Data:
-    CLASS_FILE_PATH = "./Data/class_data.csv"
-    MANAGER_FILE_PATH = "./Data/manager_data.csv"
-    MEMBER_FILE_PATH = "./Data/member_data.csv"
-    SUBSCRIPTION_FILE_PATH = "./Data/subscription_data.csv"
+    CLASS_FILE_PATH = "./Data/db/class_data.csv"
+    MANAGER_FILE_PATH = "./Data/db/manager_data.csv"
+    MEMBER_FILE_PATH = "./Data/db/member_data.csv"
+    SUBSCRIPTION_FILE_PATH = "./Data/db/subscription_data.csv"
 
-    
     def class_by_id(self, id: int):
         """Takes in an id of a fitness class, and returns
         an instance of the Fitness class model class.
@@ -21,7 +20,7 @@ class Data:
             id (int): An integer representing the id of the fitness class.
 
         Returns:
-            bool/FitnessClass: Returns an instance of FitnessClass or False if the fitness class 
+            bool/FitnessClass: Returns an instance of FitnessClass or False if the fitness class
             with the id does not exist in the database.
         """
         with open(self.CLASS_FILE_PATH, mode="r") as file:
@@ -72,7 +71,6 @@ class Data:
 
         return False
 
-
     def get_all_classes(self) -> list[FitnessClass]:
         """Opens and reads through the class database, makes instances of FitnessClasses and
         adds to a list. Returns the list.
@@ -89,4 +87,3 @@ class Data:
                 del row["trainer_id"]
                 all_classes.append(FitnessClass(**row))
         return all_classes
-         

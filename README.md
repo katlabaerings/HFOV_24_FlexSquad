@@ -1,21 +1,63 @@
 # HFOV_24_FlexSquad
 
-## Install requirements.txt
+This repository contains the code we implemented based on the highest-priority user stories identified during Sprint 1. These priorities were set collaboratively, and the user stories were translated into actionable development tasks.
 
-´´´
-pip install -r requirements.txt
-´´´
+On our GitHub page, under **Projects** -> **Product Backlog**, you can find a visual representation of our progress and planning.
+
+---
 
 ## Information about Sprint 1
+
 We implemented the following User Stories as independent functions:
+
 - US1: As a gym member I want to be able to see available classes so i can plan what class i want to attend
 - US2: As a gym member, I want to be able to attend virtual classes, so I can keep working on my health and well-being, even though I can’t physically be there
 - US3: As a gym member I want more flexible subscription plans, such as one month or a single class, so that I can easily find the best subscription that suits me
 - US4: As a fitness instructor I want to see how many members are attending my class so that I can be better prepared for each class
 - US5: As a manager I want an overview of class attendance to understand class popularity
 
-We interpreted that we could implement the User Stories independently but durning the feedback season with Shalini, we were corrected and got information that the program should run as one unit.
+Initially, we interpreted that each User Story could be implemented as an independent function.during the feedback session with Shalini, we were informed that the program should run as a cohesive, integrated unit.
 
-So therefore, in Sprint 2 we had to connect all the independant functions of each user story to the one unit program (UI). 
+As a result, in **Sprint 2**, we focused on connecting all the independent functions into a unified program with a user interface (UI).
 
+---
 
+## Installing Requirements
+
+**Python version used:**
+
+- Python 3.13
+
+To set up the development environment, follow these steps:
+
+1. **Create a virtual environment**:
+   Run the following command to create a virtual environment in the current directory:
+
+   ```bash
+   python -m venv .venv
+   ```
+
+2. **Activate the virtual environment**:
+
+- On macOS/Linux, use:
+  ```bash
+  source .venv/bin/activate
+  ```
+- On Windows, use:
+  ```bash
+  .venv\Scripts\activate
+  ```
+
+3. **Install required libraries**:
+   With the virtual environment activated, run:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+## Run the Application
+
+Once the requirements are installed and the virtual environment is activated, you can run the application using the following command:
+
+```bash
+python3 main.py
+```
