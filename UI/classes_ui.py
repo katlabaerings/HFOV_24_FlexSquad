@@ -64,3 +64,8 @@ def display_available_classes():
                 Bookings:{a_class.current_capacity}/{a_class.max_capacity}
 """
             )
+
+def sign_up_for_a_class():
+    display_available_classes()
+    #Get an input from the user for what class we want to sign up to.
+    class_logic.sign_up_for_a_class(member_id, class_id)

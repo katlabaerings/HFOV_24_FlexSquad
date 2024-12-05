@@ -10,8 +10,8 @@ class ClassLogic:
         self.write = WriteData()
 
 
-    @staticmethod
-    def get_virtual_classes():
+
+    def get_virtual_classes(self):
         all_classes = []
         script_dir = os.path.dirname(__file__)
         file_path = os.path.join(script_dir, '../Data/class_data.csv')
@@ -33,6 +33,12 @@ class ClassLogic:
         the_class = self.data.class_by_id(class_id)
         the_class.members.append(member_id)
 
+<<<<<<< Updated upstream
+=======
+    
+
+    
+>>>>>>> Stashed changes
     def get_all_classes(self):
         classes = []
         i = 1
