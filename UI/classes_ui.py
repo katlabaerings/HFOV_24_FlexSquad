@@ -14,7 +14,7 @@ def display_all_classes():
             locality = True
 
         return_str.append(
-            f"{a_class.class_name} {a_class.date} At: {a_class.time} Taught by: {a_class.trainer_id.firstname} {a_class.trainer_id.lastname} Virtual:{locality}"
+            f"{a_class.class_name} {a_class.date} ({a_class.current_capacity}/{a_class.max_capacity}) At: {a_class.time} Taught by: {a_class.trainer_id.firstname} {a_class.trainer_id.lastname} Virtual:{locality}"
         )
     return return_str
 

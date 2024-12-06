@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from UI.interfaces.custom.custom_action_form import CustomActionForm
-
+import npyscreen
 
 class IMenu(ABC, CustomActionForm):
     @abstractmethod
@@ -19,5 +19,6 @@ class IMenu(ABC, CustomActionForm):
         pass
 
     def before_editing(self):
-        """Optional method. Perform any necessary setup or validation before editing the menu."""
-        pass
+        """Perform any necessary setup or validation before editing the menu."""
+        # Call the `CustomActionForm` lifecycle
+        CustomActionForm.before_editing(self)

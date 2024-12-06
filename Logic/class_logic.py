@@ -31,16 +31,16 @@ class ClassLogic:
         trainer = self.read.manager_by_id(trainer_id)
 
         # check to make sure if the manager exists, that it is of type 'trainer'
-        if not trainer or trainer.type.lower() != "trainer":
-            return []
-
+        # if not trainer or trainer.type.lower() != "trainer":
+        #     return []
+        
         all_classes = self.read.get_all_classes()
         returning_classes = []
         for t_class in all_classes:
-            if t_class.trainer_id == trainer.id:
+            if t_class.trainer_id == trainer_id:
                 returning_classes.append(t_class)
 
-        return returning_classes
+        return all_classes
 
     # This function is for the user story "As a gym member, I want to be able to attend virtual classes,
     # so I can keep working on my health and well-being, even though I can’t physically be there"
@@ -55,26 +55,25 @@ class ClassLogic:
 
     def get_next_class(self, id):
         current_time = datetime.now()
-        classes = self.data.get_all_classes()
+        classes = self.read.get_all_classes()
         next_class = None
-        for f_class in classes:
-            members = f_class.members.split()  # Use dot notation to access attributes
-            if id not in members:
-                continue
 
+        for f_class in classes:
+            # Ensure members are split properly
+            members = f_class.members.split() if f_class.members else []
+            # Check if id is in members
+            if str(id) not in members:
+                continue
             try:
-                class_datetime = datetime.strptime(
-                    f"{f_class.date} {f_class.time}", "%d.%m.%Y %H:%M"
-                )
+                # Parse datetime from date and time
+                class_datetime = datetime.strptime(f"{f_class.date} {f_class.time}", "%d.%m.%Y %H:%M")
             except ValueError:
                 # Skip classes with invalid dates or times
                 continue
 
             # Compare to find the next upcoming class
             if class_datetime > current_time:
-                if next_class is None or class_datetime < datetime.strptime(
-                    f"{next_class.date} {next_class.time}", "%d.%m.%Y %H:%M"
-                ):
+                if next_class is None or class_datetime < datetime.strptime(f"{next_class.date} {next_class.time}", "%d.%m.%Y %H:%M"):
                     next_class = f_class
 
         return next_class
@@ -83,10 +82,11 @@ class ClassLogic:
         current_time = datetime.now()
         one_hour_later = current_time + timedelta(hours=1)
 
-        classes = self.data.get_all_classes()
+        classes = self.read.get_all_classes()
         for f_class in classes:
-            # Check if the user is in the members list
-            if id not in f_class.members.split():
+            # Ensure members are properly split and checked
+            members = f_class.members.split() if f_class.members else []
+            if str(id) not in members:  # Compare as strings
                 continue
 
             try:
