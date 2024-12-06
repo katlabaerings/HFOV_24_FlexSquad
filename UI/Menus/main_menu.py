@@ -3,10 +3,9 @@ from UI.interfaces.i_menu import IMenu
 from UI.form_enums import Form
 from Logic.class_logic import ClassLogic
 
-
 class MainMenu(IMenu):
     def create(self):
-        """Create the main menu UI"""
+        """Create the main menu UI."""
         self.title = self.add(
             npyscreen.FixedText,
             value="Welcome to City Gym Hub - where we are all about the gains!",
@@ -21,7 +20,6 @@ class MainMenu(IMenu):
             color="STANDOUT",
         )
 
-        # Menu Options
         self.options = self.add(
             npyscreen.TitleSelectOne,
             name="Options",
@@ -29,24 +27,33 @@ class MainMenu(IMenu):
             scroll_exit=True,
             max_height=6,
         )
+        self.before_editing()
 
     def before_editing(self):
-        user_id = self.parentApp.user_id
+        """Custom logic for MainMenu before editing."""
+        # Call the superclass lifecycle
+        # npyscreen.notify_confirm("Debug: before_editing called", title="Debug")
+
+        user_id = 3
+        # npyscreen.notify_confirm(f"Debug: userid {user_id}", title="Debug")
+
         if user_id:
-            # self.user_info.value = f"Your next class (User ID: {user_id} placeholder á eftir að sækja nsæta tíma)"
-            # call get_next_class
             class_logic = ClassLogic()
             class_within_hour = class_logic.is_class_within_next_hour(user_id)
             if class_within_hour:
-                self.user_info_class_soon.value = f"Coming up: {class_within_hour.class_name} at {class_within_hour.time} !"
+                self.user_info.value = f"Coming up: {class_within_hour.class_name} at {class_within_hour.time}!"
             else:
                 next_class = class_logic.get_next_class(user_id)
-                self.user_info.value = (
-                    f"{next_class.class_name} at {next_class.time} {next_class.date}"
-                )
+                if next_class:
+                    self.user_info.value = f"{next_class.class_name} at {next_class.time} {next_class.date}"
+                else:
+                    self.user_info.value = f"bla{next_class}"
+
+               # self.user_info.value = f"{next_class.class_name} at {next_class.time} {next_class.date}"
         else:
             self.user_info.value = "No User ID found. Please log in."
-        self.display()
+        
+        self.display()  # Refresh the UI
 
     def on_ok(self):
         if self.options.value is not None and len(self.options.value) > 0:

@@ -20,6 +20,8 @@ Initially, we interpreted that each User Story could be implemented as an indepe
 
 As a result, in **Sprint 2**, we focus on connecting all the independent functions into a unified program with a user interface (UI).
 
+Side note: in few places the user_id is hardcoded so the app can show the functions. 
+
 ---
 
 ## Installing Requirements
