@@ -10,6 +10,7 @@ from UI.Menus.subscription_menu import (
 from UI.Menus.trainer_menu import TrainerMenuForm, ClassMenuForm
 from UI.Menus.main_menu import MainMenu
 from UI.Menus.login_menu import LoginMenu
+from UI.Menus.virtual_menu import VirtualMenu
 from UI.form_enums import Form
 
 
@@ -25,6 +26,7 @@ class GymApp(npyscreen.NPSAppManaged):
         self.addForm(Form.ALL_CLASS, AllClassesMenu, name="All Classes")
         self.addForm(Form.CLASS_TODAY, ClassesTodayMenu, name="Classes Today")
         self.addForm(Form.BOOK_CLASS, BookClassMenu, name="Book Class")
+        self.addForm(Form.CLASS_MENU, VirtualMenu, name="Virtual Menu")
         self.addForm(Form.POST_PLAN, PostPlanOptionsMenu, name="Post Plan Options")
         self.addForm(Form.CLASS_BUNDLE, ClassBundleMenu, name="Class Bundle Options")
         self.addForm(Form.TRAINER, TrainerMenuForm, name="View Classes by Trainer")
