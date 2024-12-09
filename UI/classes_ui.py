@@ -41,19 +41,16 @@ def display_classes_today():
 
 def display_available_classes():
     all_classes = data.get_all_classes()
+    classes = []
     for a_class in all_classes:
         locality = False
         if a_class.locality == "L":
             locality = True
         if int(a_class.max_capacity) > int(a_class.current_capacity):
-            print(
-                f"""                {a_class.class_name} 
-                {a_class.date} At: {a_class.time} 
-                Taught by: {a_class.trainer_id.firstname} {a_class.trainer_id.lastname}
-                Virtual:{locality}
-                Bookings:{a_class.current_capacity}/{a_class.max_capacity}
-"""
+            classes.append(
+                f"{a_class.class_name} {a_class.date} At: {a_class.time} Taught by: {a_class.trainer_id.firstname} {a_class.trainer_id.lastname} Virtual:{locality} Bookings:{a_class.current_capacity}/{a_class.max_capacity}"
             )
+    return classes
 
 
 def sign_up_for_a_class():

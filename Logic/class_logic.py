@@ -12,7 +12,7 @@ class ClassLogic:
 
     # This function is used to implement the user story:"As a gym member I want to be able to
     # book classes easily through platforms such as an app"
-    def add_member_to_classLOGIC(self, member_id: int, class_id: int):
+    def add_member_to_class(self, member_id: int, class_id: int):
         # Calls the appropriate function to sign a member to a certain class.
         return self.write.add_member_to_classDATA(member_id, class_id)
 
@@ -33,14 +33,14 @@ class ClassLogic:
         # check to make sure if the manager exists, that it is of type 'trainer'
         # if not trainer or trainer.type.lower() != "trainer":
         #     return []
-        
+
         all_classes = self.read.get_all_classes()
         returning_classes = []
         for t_class in all_classes:
-            if t_class.trainer_id == trainer_id:
+            if t_class.trainer_id.id == trainer_id:
                 returning_classes.append(t_class)
 
-        return all_classes
+        return returning_classes
 
     # This function is for the user story "As a gym member, I want to be able to attend virtual classes,
     # so I can keep working on my health and well-being, even though I can’t physically be there"
@@ -66,14 +66,18 @@ class ClassLogic:
                 continue
             try:
                 # Parse datetime from date and time
-                class_datetime = datetime.strptime(f"{f_class.date} {f_class.time}", "%d.%m.%Y %H:%M")
+                class_datetime = datetime.strptime(
+                    f"{f_class.date} {f_class.time}", "%d.%m.%Y %H:%M"
+                )
             except ValueError:
                 # Skip classes with invalid dates or times
                 continue
 
             # Compare to find the next upcoming class
             if class_datetime > current_time:
-                if next_class is None or class_datetime < datetime.strptime(f"{next_class.date} {next_class.time}", "%d.%m.%Y %H:%M"):
+                if next_class is None or class_datetime < datetime.strptime(
+                    f"{next_class.date} {next_class.time}", "%d.%m.%Y %H:%M"
+                ):
                     next_class = f_class
 
         return next_class

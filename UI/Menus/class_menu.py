@@ -60,7 +60,7 @@ class PickClassMenu(IMenu):
         if selected == 0:
             self.parentApp.switchForm(Form.ALL_CLASS)
         elif selected == 1:
-            self.parentApp.switchForm(Form.TRAINER)
+            self.parentApp.switchForm(Form.CLASS_MENU)
         elif selected == 2:
             self.parentApp.setNextForm(Form.CLASS_TODAY)
         elif selected == 3:

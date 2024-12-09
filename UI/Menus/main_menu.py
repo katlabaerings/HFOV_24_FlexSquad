@@ -58,16 +58,16 @@ class MainMenu(IMenu):
     def on_ok(self):
         if self.options.value is not None and len(self.options.value) > 0:
             selected = self.options.value[0]
-            if selected == 0:
-                self.parentApp.getForm(Form.SUBSCRIPTION).update_subscription()
-                self.parentApp.switchForm(Form.SUBSCRIPTION)
-            elif selected == 1:
-                npyscreen.notify_confirm("Feature coming soon!", title="Book a Class")
-                self.parentApp.switchForm(Form.MAIN)
-            elif selected == 2:
-                self.parentApp.switchForm(Form.PICK_CLASS)
-            elif selected == 3:
-                self.parentApp.setNextForm(None)
+            match selected:
+                case 0:
+                    self.parentApp.getForm(Form.SUBSCRIPTION).update_subscription()
+                    self.parentApp.switchForm(Form.SUBSCRIPTION)
+                case 1:
+                    self.parentApp.switchForm(Form.BOOK_CLASS)
+                case 2:
+                    self.parentApp.switchForm(Form.PICK_CLASS)
+                case 3:
+                    self.parentApp.setNextForm(None)
         else:
             npyscreen.notify_confirm(
                 "Please select an option to proceed.", title="Error"

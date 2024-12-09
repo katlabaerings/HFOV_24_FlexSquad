@@ -7,51 +7,22 @@ from Logic.class_logic import ClassLogic
 
 class TrainerMenuForm(IMenu):
     def create(self):
-        self.title = self.add(
-            npyscreen.TitleText,
-            name="Enter Trainer ID",
-            value="",
-            editable=True,
-            color="STANDOUT",
-        )
         self.classes_status = self.add(
-            npyscreen.FixedText, value="", editable=False, color="STANDOUT"
+            npyscreen.TitleText, name="Trainer ID: ", color="STANDOUT"
         )
-        self.before_editing()
 
     def fetch_classes(self, trainer_id):
         class_logic = ClassLogic()
         return class_logic.get_classes_by_trainer(trainer_id)
 
-    def before_editing(self):
-        trainer_id = 3
-        if not trainer_id:
-            self.classes_status.value = "Trainer ID is missing. Please log in again."
-            return
-
-        classes = self.fetch_classes(trainer_id)
-        if not classes:
-            self.classes_status.value = "No classes found for the given Trainer ID."
-            return
-        self.display()
-
     def on_ok(self):
-        trainer_id = self.parentApp.user_id
-        if not trainer_id:
-            npyscreen.notify_confirm("Trainer ID cannot be empty.", title="Error")
-            self.parentApp.switchForm(Form.MAIN)
-            return
+        trainer_id = self.classes_status.value
+        if trainer_id:
+            classes = self.fetch_classes(trainer_id)
 
-        classes = self.fetch_classes(trainer_id)
-        if not classes:
-            npyscreen.notify_confirm(
-                "No classes found for the given Trainer ID.", title="Error"
-            )
-            self.parentApp.switchForm(Form.MAIN)
-            return
-
-        self.parentApp.getForm(Form.CLASS_MENU).set_classes(classes)
-        self.parentApp.switchForm(Form.CLASS_MENU)
+            self.parentApp.getForm(Form.CLASS_MENU).set_classes(classes)
+            npyscreen.notify_confirm(str(classes))
+            self.parentApp.switchForm(Form.CLASS_MENU)
 
     def on_cancel(self):
         self.parentApp.switchForm(Form.MAIN)
