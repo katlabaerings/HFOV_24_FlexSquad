@@ -23,6 +23,13 @@ class MainMenu(IMenu):
             color="STANDOUT",
         )
 
+        self.user_loyal = self.add(
+            npyscreen.FixedText,
+            value="",  # Placeholder for user info
+            editable=False,
+            color="STANDOUT",
+        )
+
         self.options = self.add(
             npyscreen.TitleSelectOne,
             name="Options",
@@ -51,16 +58,17 @@ class MainMenu(IMenu):
             class_logic = ClassLogic()
             class_within_hour = class_logic.is_class_within_next_hour(self.user_id)
             if class_within_hour:
-                self.user_info.value = f"Coming up: {class_within_hour.class_name} at {class_within_hour.time}!"
+                #Within the next hour
+                self.user_info.value = f"Coming up: {class_within_hour.class_name} at {class_within_hour.time}!\n"
             else:
+                #next class 
                 next_class = class_logic.get_next_class(self.user_id)
                 if next_class:
-                    self.user_info.value = f"{next_class.class_name} at {next_class.time} {next_class.date}"
+                    self.user_info.value = f"{next_class.class_name} at {next_class.time} {next_class.date}\n"
                 else:
                     # Motivaiting out members if they have no classes
-                    self.user_info.value = f"{randomMotivation}"
+                    self.user_info.value = f"{randomMotivation}\n"
 
-            # self.user_info.value = f"{next_class.class_name} at {next_class.time} {next_class.date}"
 
             # Add loyalty rewards for the user
             member = class_logic.get_member_by_id(self.user_id)
@@ -69,7 +77,7 @@ class MainMenu(IMenu):
                     member.joined_date
                 )
                 rewards = class_logic.get_loyalty_rewards(loyalty_points)
-                self.user_info.value = (
+                self.user_loyal.value = (
                     f"Hi {member.firstname}!\n"
                     f"You have {loyalty_points} loyalty points.\n"
                     f"Your rewards: {rewards}"
