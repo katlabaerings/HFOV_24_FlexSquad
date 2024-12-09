@@ -50,6 +50,18 @@ class MainMenu(IMenu):
                     self.user_info.value = f"bla{next_class}"
 
                # self.user_info.value = f"{next_class.class_name} at {next_class.time} {next_class.date}"
+            
+             # Add loyalty rewards for the user
+            member = class_logic.get_member_by_id(user_id) 
+            if member:
+                loyalty_points = class_logic.calculate_loyalty_points(member.joined_date)
+                rewards = class_logic.get_loyalty_rewards(loyalty_points)
+                self.user_info.value = (
+                    f"Hi {member.firstname}!\n"
+                    f"You have {loyalty_points} loyalty points.\n"
+                    f"Your rewards: {rewards}"
+                )
+
         else:
             self.user_info.value = "No User ID found. Please log in."
         

@@ -7,3 +7,4 @@ class Member:
     firstname: str
     lastname: str
     email: str
+    joined_date: str

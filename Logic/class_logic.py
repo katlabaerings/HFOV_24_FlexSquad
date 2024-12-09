@@ -103,3 +103,35 @@ class ClassLogic:
                 return f_class  # Return the class if it is within the next hour
 
         return None
+    
+    # These following functions (get_member_by_id, calculate_loyalty_points and get_loyalty_rewards)
+    # are for the user story: "As a long-term gym member, I want to be rewarded for being 
+    # a loyal customer to help me stay motivated on my fitness journey"
+    def get_member_by_id(self, user_id: int):
+        try:
+            member = self.read.member_by_id(user_id)
+            return member
+        except Exception as e:
+            print(f"Error retrieving member with ID {user_id}: {e}")
+            return None
+    
+    def calculate_loyalty_points(self, joined_date: str) -> int:
+        """Calculate loyalty points based on the member's join date."""
+        try:
+            join_date = datetime.strptime(joined_date, "%Y-%m-%d")
+            years_as_member = (datetime.now() - join_date).days // 365
+            return years_as_member * 10  # 10 points per year
+        except ValueError:
+            return 0
+    
+    def get_loyalty_rewards(self, points: int) -> str:
+        """Determine rewards based on loyalty points."""
+        if 10 <= points <= 20:
+            return "Enjoy one free juice at the Boozt Bar"
+        elif 30 <= points <= 40:
+            return "Enjoy one free juice at the Boozt Bar and a personalized food plan"
+        elif points >= 50:
+            return "Enjoy one free juice at the Boozt Bar, a personalized food plan, and a one-on-one personal trainer session"
+        else:
+            return "No rewards yet, but starting your second year with us, you'll earn rewards every year!"
+ 
