@@ -32,10 +32,7 @@ class TrainerMenuForm(IMenu):
         classes = self.fetch_classes(trainer_id)
         if not classes:
             self.classes_status.value = "No classes found for the given Trainer ID."
-        else:
-            self.classes_status.value = (
-                f"{len(classes)} classes found, press ok to see details"
-            )
+            return
         self.display()
 
     def on_ok(self):
@@ -60,7 +57,7 @@ class TrainerMenuForm(IMenu):
         self.parentApp.switchForm(Form.MAIN)
 
 
-class ClassMenuForm(npyscreen.ActionForm):
+class ClassMenuForm(IMenu):
     def create(self):
         # Title
         self.add(npyscreen.FixedText, value="Classes", editable=False, color="STANDOUT")
