@@ -30,6 +30,7 @@ class MainMenu(IMenu):
             scroll_exit=True,
             max_height=6,
         )
+        self.options.when_value_edited = self.on_selection_change
 
     def beforeEditing(self):
         """Custom logic for MainMenu before editing."""
@@ -79,7 +80,7 @@ class MainMenu(IMenu):
             self.user_info.value = "No User ID found. Please log in."
         self.display()  # Refresh the UI
 
-    def on_ok(self):
+    def on_selection_change(self):
         if self.options.value is not None and len(self.options.value) > 0:
             selected = self.options.value[0]
             match selected:
@@ -92,11 +93,9 @@ class MainMenu(IMenu):
                     self.parentApp.switchForm(Form.PICK_CLASS)
                 case 3:
                     self.parentApp.setNextForm(None)
-        else:
-            npyscreen.notify_confirm(
-                "Please select an option to proceed.", title="Error"
-            )
-            self.parentApp.switchForm(Form.MAIN)
+
+    def on_ok(self):
+        self.on_selection_change()
 
     def on_cancel(self):
         self.parentApp.setNextForm(None)
