@@ -1,3 +1,4 @@
+import random
 import npyscreen
 from UI.interfaces.i_menu import IMenu
 from UI.form_enums import Form
@@ -33,8 +34,9 @@ class MainMenu(IMenu):
         """Custom logic for MainMenu before editing."""
         # Call the superclass lifecycle
         # npyscreen.notify_confirm("Debug: before_editing called", title="Debug")
-
+        motivaitingList = ["We are what we repeatedly do. Excellence, then, is not an act, but a habit.", "Just believe in yourself. Even if you don’t, just pretend that you do and at some point, you will.", " All progress takes place outside the comfort zone.", " Once you are exercising regularly, the hardest thing is to stop it.", "Push harder than yesterday if you want a different tomorrow. ", "The real workout starts when you want to stop."]
         user_id = 3
+        randomMotivation = random.choice(motivaitingList)
         # npyscreen.notify_confirm(f"Debug: userid {user_id}", title="Debug")
 
         if user_id:
@@ -47,7 +49,8 @@ class MainMenu(IMenu):
                 if next_class:
                     self.user_info.value = f"{next_class.class_name} at {next_class.time} {next_class.date}"
                 else:
-                    self.user_info.value = f"bla{next_class}"
+                    #Motivaiting out members if they have no classes 
+                    self.user_info.value = f"{randomMotivation}"
 
                # self.user_info.value = f"{next_class.class_name} at {next_class.time} {next_class.date}"
             
@@ -64,22 +67,21 @@ class MainMenu(IMenu):
 
         else:
             self.user_info.value = "No User ID found. Please log in."
-        
         self.display()  # Refresh the UI
 
     def on_ok(self):
         if self.options.value is not None and len(self.options.value) > 0:
             selected = self.options.value[0]
-            if selected == 0:
-                self.parentApp.getForm(Form.SUBSCRIPTION).update_subscription()
-                self.parentApp.switchForm(Form.SUBSCRIPTION)
-            elif selected == 1:
-                npyscreen.notify_confirm("Feature coming soon!", title="Book a Class")
-                self.parentApp.switchForm(Form.MAIN)
-            elif selected == 2:
-                self.parentApp.switchForm(Form.PICK_CLASS)
-            elif selected == 3:
-                self.parentApp.setNextForm(None)
+            match selected:
+                case 0:
+                    self.parentApp.getForm(Form.SUBSCRIPTION).update_subscription()
+                    self.parentApp.switchForm(Form.SUBSCRIPTION)
+                case 1:
+                    self.parentApp.switchForm(Form.BOOK_CLASS)
+                case 2:
+                    self.parentApp.switchForm(Form.PICK_CLASS)
+                case 3:
+                    self.parentApp.setNextForm(None)
         else:
             npyscreen.notify_confirm(
                 "Please select an option to proceed.", title="Error"

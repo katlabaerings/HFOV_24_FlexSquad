@@ -1,5 +1,6 @@
 import npyscreen
 
+from UI.Menus.book_class import BookClassMenu
 from UI.Menus.class_menu import AllClassesMenu, ClassesTodayMenu, PickClassMenu
 from UI.Menus.subscription_menu import (
     SubscriptionMenu,
@@ -23,6 +24,7 @@ class GymApp(npyscreen.NPSAppManaged):
         self.addForm(Form.PICK_CLASS, PickClassMenu, name="Pick Class Option")
         self.addForm(Form.ALL_CLASS, AllClassesMenu, name="All Classes")
         self.addForm(Form.CLASS_TODAY, ClassesTodayMenu, name="Classes Today")
+        self.addForm(Form.BOOK_CLASS, BookClassMenu, name="Book Class")
         self.addForm(Form.POST_PLAN, PostPlanOptionsMenu, name="Post Plan Options")
         self.addForm(Form.CLASS_BUNDLE, ClassBundleMenu, name="Class Bundle Options")
         self.addForm(Form.TRAINER, TrainerMenuForm, name="View Classes by Trainer")
