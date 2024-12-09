@@ -4,9 +4,11 @@ from UI.interfaces.i_menu import IMenu
 from UI.form_enums import Form
 from Logic.class_logic import ClassLogic
 
+
 class MainMenu(IMenu):
     def create(self):
         """Create the main menu UI."""
+
         self.title = self.add(
             npyscreen.FixedText,
             value="Welcome to City Gym Hub - where we are all about the gains!",
@@ -28,31 +30,51 @@ class MainMenu(IMenu):
             scroll_exit=True,
             max_height=6,
         )
-        self.before_editing()
 
-    def before_editing(self):
+    def beforeEditing(self):
         """Custom logic for MainMenu before editing."""
         # Call the superclass lifecycle
-        # npyscreen.notify_confirm("Debug: before_editing called", title="Debug")
-        motivaitingList = ["We are what we repeatedly do. Excellence, then, is not an act, but a habit.", "Just believe in yourself. Even if you don’t, just pretend that you do and at some point, you will.", " All progress takes place outside the comfort zone.", " Once you are exercising regularly, the hardest thing is to stop it.", "Push harder than yesterday if you want a different tomorrow. ", "The real workout starts when you want to stop."]
-        user_id = 3
-        randomMotivation = random.choice(motivaitingList)
-        # npyscreen.notify_confirm(f"Debug: userid {user_id}", title="Debug")
+        self.user_id = self.parentApp.user_id
+        motivaitingList = [
+            "We are what we repeatedly do. Excellence, then, is not an act, but a habit.",
+            "Just believe in yourself. Even if you don’t, just pretend that you do and at some point, you will.",
+            " All progress takes place outside the comfort zone.",
+            " Once you are exercising regularly, the hardest thing is to stop it.",
+            "Push harder than yesterday if you want a different tomorrow. ",
+            "The real workout starts when you want to stop.",
+        ]
 
-        if user_id:
+        randomMotivation = random.choice(motivaitingList)
+        # npyscreen.notify_confirm(f"Debug: userid {self.user_id}", title="Debug")
+
+        if self.user_id:
             class_logic = ClassLogic()
-            class_within_hour = class_logic.is_class_within_next_hour(user_id)
+            class_within_hour = class_logic.is_class_within_next_hour(self.user_id)
             if class_within_hour:
                 self.user_info.value = f"Coming up: {class_within_hour.class_name} at {class_within_hour.time}!"
             else:
-                next_class = class_logic.get_next_class(user_id)
+                next_class = class_logic.get_next_class(self.user_id)
                 if next_class:
                     self.user_info.value = f"{next_class.class_name} at {next_class.time} {next_class.date}"
                 else:
-                    #Motivaiting out members if they have no classes 
+                    # Motivaiting out members if they have no classes
                     self.user_info.value = f"{randomMotivation}"
 
-               # self.user_info.value = f"{next_class.class_name} at {next_class.time} {next_class.date}"
+            # self.user_info.value = f"{next_class.class_name} at {next_class.time} {next_class.date}"
+
+            # Add loyalty rewards for the user
+            member = class_logic.get_member_by_id(self.user_id)
+            if member:
+                loyalty_points = class_logic.calculate_loyalty_points(
+                    member.joined_date
+                )
+                rewards = class_logic.get_loyalty_rewards(loyalty_points)
+                self.user_info.value = (
+                    f"Hi {member.firstname}!\n"
+                    f"You have {loyalty_points} loyalty points.\n"
+                    f"Your rewards: {rewards}"
+                )
+
         else:
             self.user_info.value = "No User ID found. Please log in."
         self.display()  # Refresh the UI
