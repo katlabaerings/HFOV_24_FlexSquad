@@ -41,7 +41,7 @@ class ClassMenuForm(IMenu):
     def set_classes(self, classes):
         self.fitness_classes = classes
         self.class_menu.values = [
-            f"{cls.class_name} ({cls.max_capacity}/{cls.current_capacity}) - {cls.time} on {cls.date}"
+            f"{cls.class_name} ({cls.current_capacity}/{cls.max_capacity}) - {cls.time} on {cls.date}"
             for cls in self.fitness_classes
         ]
         self.class_menu.display()
