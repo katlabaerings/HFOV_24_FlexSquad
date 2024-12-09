@@ -4,6 +4,7 @@ from UI.Menus.all_classes_form import AllClassesForm
 from UI.Menus.main_menu import MainMenu
 from UI.Menus.subscription_menu import SubscriptionForm, PostPlanOptionsForm, ClassBundleForm
 from UI.Menus.trainer_menu import TrainerMenuForm, ClassMenuForm
+from UI.Menus.virtual_class_ui import VirtualClassForm
 
 
 class GymApp(npyscreen.NPSAppManaged):
@@ -16,6 +17,7 @@ class GymApp(npyscreen.NPSAppManaged):
         self.addForm('CLASS_BUNDLE', ClassBundleForm, name="Class Bundle Options")
         self.addForm('TRAINER', TrainerMenuForm, name="Trainer Menu")
         self.addForm('CLASS_MENU', ClassMenuForm, name="Class Menu")
+        self.addForm('VIRTUAL_CLASS', VirtualClassForm, name='Virtual Class Menu')
 
     def onCleanExit(self):
         npyscreen.notify_confirm("Exiting application. Goodbye!", title="Exit")
