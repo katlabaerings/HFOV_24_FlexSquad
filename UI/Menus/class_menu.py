@@ -52,7 +52,7 @@ class PickClassMenu(IMenu):
         choice = self.options.value
 
         if choice is not None and len(choice) > 0:
-            npyscreen.notify_confirm(f"Debug: choice {choice}", title="Debug")
+           # npyscreen.notify_confirm(f"Debug: choice {choice}", title="Debug")
             selected = choice[0]
             match selected:
                 case 0:

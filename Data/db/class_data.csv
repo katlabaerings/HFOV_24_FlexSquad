@@ -1,7 +1,13 @@
 id,class_name,max_capacity,current_capacity,members,trainer_id,time,date,locality,link
-1,Moonwalking competition,50,2,5 6,3,12:30,06.12.2024,V,https://www.youtube.com/watch?v=dQw4w9WgXcQ
-2,Alpha male joe rogan lifting of war,3,2,2 2,3,13:00,06.12.2024,L,None
-3,SportHiit,50,2,3 5 6,3,23:59,06.12.2024,V,https://www.youtube.com/watch?v=dQw4w9WgXcQ
-4,Pilates,20,1,2,3,13:00,08.12.2024,L,None
-5,Spining,50,2,3 6,3,12:30,08.12.2024,V,https://www.youtube.com/watch?v=dQw4w9WgXcQ
-6,Hot Yoga,40,0,3,4,13:00,10.12.2024,L,None
+1,Moonwalking competition,50,2,5 6,3,12:30,09.12.2024,V,https://www.youtube.com/watch?v=dQw4w9WgXcQ
+2,Alpha male joe rogan lifting of war,3,2,2 2,3,13:00,09.12.2024,L,None
+3,SportHiit,50,33,3 5 6,3,23:59,09.12.2024,V,https://www.youtube.com/watch?v=dQw4w9WgXcQ
+4,Pilates,20,18,2,3,13:00,09.12.2024,L,None
+5,Spining,50,44,3 6,3,12:30,09.12.2024,V,https://www.youtube.com/watch?v=dQw4w9WgXcQ
+6,Hot Yoga,40,40,3,4,22:00,19.12.2024,L,None
+7,Moonwalking competition,50,2,5 6,3,12:30,10.12.2024,V,https://www.youtube.com/watch?v=dQw4w9WgXcQ
+8,Alpha male joe rogan lifting of war,3,2,2 2,3,13:00,10.12.2024,L,None
+9,SportHiit,50,33,3 5 6,3,23:59,10.12.2024,V,https://www.youtube.com/watch?v=dQw4w9WgXcQ
+10,Pilates,20,18,2,3,13:00,11.12.2024,L,None
+11,Spining,50,44,3 6,3,12:30,11.12.2024,V,https://www.youtube.com/watch?v=dQw4w9WgXcQ
+12,Hot Yoga,40,40,3,4,13:00,11.12.2024,L,None
