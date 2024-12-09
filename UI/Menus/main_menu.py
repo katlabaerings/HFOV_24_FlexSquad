@@ -4,6 +4,7 @@ from UI.interfaces.i_menu import IMenu
 from UI.form_enums import Form
 from Logic.class_logic import ClassLogic
 
+
 class MainMenu(IMenu):
     def create(self):
         """Create the main menu UI."""
@@ -34,8 +35,15 @@ class MainMenu(IMenu):
         """Custom logic for MainMenu before editing."""
         # Call the superclass lifecycle
         # npyscreen.notify_confirm("Debug: before_editing called", title="Debug")
-        motivaitingList = ["We are what we repeatedly do. Excellence, then, is not an act, but a habit.", "Just believe in yourself. Even if you don’t, just pretend that you do and at some point, you will.", " All progress takes place outside the comfort zone.", " Once you are exercising regularly, the hardest thing is to stop it.", "Push harder than yesterday if you want a different tomorrow. ", "The real workout starts when you want to stop."]
-        user_id = 3
+        motivaitingList = [
+            "We are what we repeatedly do. Excellence, then, is not an act, but a habit.",
+            "Just believe in yourself. Even if you don’t, just pretend that you do and at some point, you will.",
+            " All progress takes place outside the comfort zone.",
+            " Once you are exercising regularly, the hardest thing is to stop it.",
+            "Push harder than yesterday if you want a different tomorrow. ",
+            "The real workout starts when you want to stop.",
+        ]
+        user_id = self.parentApp.user_id
         randomMotivation = random.choice(motivaitingList)
         # npyscreen.notify_confirm(f"Debug: userid {user_id}", title="Debug")
 
@@ -49,10 +57,10 @@ class MainMenu(IMenu):
                 if next_class:
                     self.user_info.value = f"{next_class.class_name} at {next_class.time} {next_class.date}"
                 else:
-                    #Motivaiting out members if they have no classes 
+                    # Motivaiting out members if they have no classes
                     self.user_info.value = f"{randomMotivation}"
 
-               # self.user_info.value = f"{next_class.class_name} at {next_class.time} {next_class.date}"
+            # self.user_info.value = f"{next_class.class_name} at {next_class.time} {next_class.date}"
         else:
             self.user_info.value = "No User ID found. Please log in."
         self.display()  # Refresh the UI
