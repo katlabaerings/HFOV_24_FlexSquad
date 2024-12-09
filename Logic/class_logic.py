@@ -1,67 +1,109 @@
-import csv
-import os
-from Data.read_data import Data
+from datetime import datetime, timedelta
+from Data.read_data import ReadData
 from Data.write_data import WriteData
+
+from Data.models.fitness_class import FitnessClass
 
 
 class ClassLogic:
     def __init__(self):
-        self.data = Data()
+        self.read = ReadData()
         self.write = WriteData()
 
-
-    @staticmethod
-    def get_virtual_classes():
-        all_classes = []
-        script_dir = os.path.dirname(__file__)
-        file_path = os.path.join(script_dir, '../Data/class_data.csv')
-        with open(file_path, newline='') as csvfile:
-            reader = csv.DictReader(csvfile)
-            for row in reader:
-                all_classes.append(row)
-        ret_lis = []
-        for i in all_classes:
-            if i['locality'] == 'V':
-                ret_lis.append(i)
-        return ret_lis
-
-
-    def get_all_classesLOGIC(self):
-        # try:
-        return self.data.get_all_classesDATA()
-        # except Exception:
-        #     return "no classes found..."
-
-    def add_member_to_classLOGIC(self, member_id, class_id):
+    # This function is used to implement the user story:"As a gym member I want to be able to
+    # book classes easily through platforms such as an app"
+    def add_member_to_class(self, member_id: int, class_id: int):
+        # Calls the appropriate function to sign a member to a certain class.
         return self.write.add_member_to_classDATA(member_id, class_id)
 
+    # This function is used to implement the user story: "As a fitness instructor I want to see
+    # how many members are attending my class so that I can be better prepared for each class"
+    def get_classes_by_trainer(self, trainer_id: int) -> list[FitnessClass]:
+        """Returns a list of classes that the trainer with the id is
+        teaching.
 
+        Args:
+            trainer_id (int): An integer representing the id of the trainer.
 
+        Returns:
+            list[FitnessClass]: Returns a list of FitnessClass instances
+        """
+        trainer = self.read.manager_by_id(trainer_id)
 
-def get_all_classes():
-    data = Data()
-    classes = []
-    i = 1
-    while fitness_class := data.class_by_id(i):
-        classes.append(fitness_class)
-        i += 1
-    return classes
+        # check to make sure if the manager exists, that it is of type 'trainer'
+        # if not trainer or trainer.type.lower() != "trainer":
+        #     return []
 
+        all_classes = self.read.get_all_classes()
+        returning_classes = []
+        for t_class in all_classes:
+            if t_class.trainer_id.id == trainer_id:
+                returning_classes.append(t_class)
 
-def get_classes_by_trainer(trainer_id: int):
-    all_classes = get_all_classes()
-    returning_classes = []
-    for clas in all_classes:
-        if clas.trainer.id == trainer_id:
-            returning_classes.append(clas)
-    return returning_classes
+        return returning_classes
 
+    # This function is for the user story "As a gym member, I want to be able to attend virtual classes,
+    # so I can keep working on my health and well-being, even though I can’t physically be there"
+    # This function filters out all the classes that are virtual and returns a list of them.
+    def get_virtual_classes(self):
+        classes = self.read.get_all_classes()
+        v_classes = []
+        for f_class in classes:
+            if f_class.locality == "V":
+                v_classes.append(f_class)
+        return v_classes
 
-def get_virtual_classes():
-    classes = get_all_classes()
-    v_classes = []
-    for f_class in classes:
-        if f_class.locality == 'V':
-            v_classes.append(f_class)
-    return v_classes
+    def get_next_class(self, id):
+        current_time = datetime.now()
+        classes = self.read.get_all_classes()
+        next_class = None
 
+        for f_class in classes:
+            # Ensure members are split properly
+            members = f_class.members.split() if f_class.members else []
+            # Check if id is in members
+            if str(id) not in members:
+                continue
+            try:
+                # Parse datetime from date and time
+                class_datetime = datetime.strptime(
+                    f"{f_class.date} {f_class.time}", "%d.%m.%Y %H:%M"
+                )
+            except ValueError:
+                # Skip classes with invalid dates or times
+                continue
+
+            # Compare to find the next upcoming class
+            if class_datetime > current_time:
+                if next_class is None or class_datetime < datetime.strptime(
+                    f"{next_class.date} {next_class.time}", "%d.%m.%Y %H:%M"
+                ):
+                    next_class = f_class
+
+        return next_class
+
+    def is_class_within_next_hour(self, id):
+        current_time = datetime.now()
+        one_hour_later = current_time + timedelta(hours=1)
+
+        classes = self.read.get_all_classes()
+        for f_class in classes:
+            # Ensure members are properly split and checked
+            members = f_class.members.split() if f_class.members else []
+            if str(id) not in members:  # Compare as strings
+                continue
+
+            try:
+                # Parse the class's date and time into a datetime object
+                class_datetime = datetime.strptime(
+                    f"{f_class.date} {f_class.time}", "%d.%m.%Y %H:%M"
+                )
+            except ValueError:
+                # Skip classes with invalid dates or times
+                continue
+
+            # Check if the class is within the next hour
+            if current_time <= class_datetime <= one_hour_later:
+                return f_class  # Return the class if it is within the next hour
+
+        return None

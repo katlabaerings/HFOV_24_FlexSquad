@@ -1,46 +1,80 @@
+import random
 import npyscreen
+from UI.interfaces.i_menu import IMenu
+from UI.form_enums import Form
+from Logic.class_logic import ClassLogic
 
-
-class MainMenu(npyscreen.ActionForm):
+class MainMenu(IMenu):
     def create(self):
-        # Title
-        self.add(npyscreen.FixedText, value="Welcome to City Gym Hub - where we are all about the gains!",
-                 editable=False, color="STANDOUT")
+        """Create the main menu UI."""
+        self.title = self.add(
+            npyscreen.FixedText,
+            value="Welcome to City Gym Hub - where we are all about the gains!",
+            editable=False,
+            color="STANDOUT",
+        )
 
-        # Menu Options
+        self.user_info = self.add(
+            npyscreen.FixedText,
+            value="",  # Placeholder for user info
+            editable=False,
+            color="STANDOUT",
+        )
+
         self.options = self.add(
             npyscreen.TitleSelectOne,
             name="Options",
-            values=[
-                "View Subscription Plans",
-                "Book A Class",
-                "See All Classes",
-                "See Trainer Classes",
-                "Exit"
-            ],
+            values=["View Subscription Plans", "Book A Class", "See Classes", "Exit"],
             scroll_exit=True,
-            max_height=6
+            max_height=6,
         )
+        self.before_editing()
+
+    def before_editing(self):
+        """Custom logic for MainMenu before editing."""
+        # Call the superclass lifecycle
+        # npyscreen.notify_confirm("Debug: before_editing called", title="Debug")
+        motivaitingList = ["We are what we repeatedly do. Excellence, then, is not an act, but a habit.", "Just believe in yourself. Even if you don’t, just pretend that you do and at some point, you will.", " All progress takes place outside the comfort zone.", " Once you are exercising regularly, the hardest thing is to stop it.", "Push harder than yesterday if you want a different tomorrow. ", "The real workout starts when you want to stop."]
+        user_id = 3
+        randomMotivation = random.choice(motivaitingList)
+        # npyscreen.notify_confirm(f"Debug: userid {user_id}", title="Debug")
+
+        if user_id:
+            class_logic = ClassLogic()
+            class_within_hour = class_logic.is_class_within_next_hour(user_id)
+            if class_within_hour:
+                self.user_info.value = f"Coming up: {class_within_hour.class_name} at {class_within_hour.time}!"
+            else:
+                next_class = class_logic.get_next_class(user_id)
+                if next_class:
+                    self.user_info.value = f"{next_class.class_name} at {next_class.time} {next_class.date}"
+                else:
+                    #Motivaiting out members if they have no classes 
+                    self.user_info.value = f"{randomMotivation}"
+
+               # self.user_info.value = f"{next_class.class_name} at {next_class.time} {next_class.date}"
+        else:
+            self.user_info.value = "No User ID found. Please log in."
+        self.display()  # Refresh the UI
 
     def on_ok(self):
-
         if self.options.value is not None and len(self.options.value) > 0:
             selected = self.options.value[0]
-            if selected == 0:
-                self.parentApp.getForm('SUBSCRIPTION').update_subscription()
-                self.parentApp.switchForm('SUBSCRIPTION')
-            elif selected == 1:
-                npyscreen.notify_confirm("Feature coming soon!", title="Book a Class")
-                self.parentApp.switchForm('MAIN')
-            elif selected == 2:
-                self.parentApp.switchForm('ALL_CLASS')
-            elif selected == 3:
-                self.parentApp.switchForm('TRAINER')
-            elif selected == 4:
-                self.parentApp.setNextForm(None)
+            match selected:
+                case 0:
+                    self.parentApp.getForm(Form.SUBSCRIPTION).update_subscription()
+                    self.parentApp.switchForm(Form.SUBSCRIPTION)
+                case 1:
+                    self.parentApp.switchForm(Form.BOOK_CLASS)
+                case 2:
+                    self.parentApp.switchForm(Form.PICK_CLASS)
+                case 3:
+                    self.parentApp.setNextForm(None)
         else:
-            npyscreen.notify_confirm("Please select an option to proceed.", title="Error")
-            self.parentApp.switchForm('MAIN')
+            npyscreen.notify_confirm(
+                "Please select an option to proceed.", title="Error"
+            )
+            self.parentApp.switchForm(Form.MAIN)
 
-    def on_cancel(self):  # This method is called when "Cancel" is pressed
+    def on_cancel(self):
         self.parentApp.setNextForm(None)

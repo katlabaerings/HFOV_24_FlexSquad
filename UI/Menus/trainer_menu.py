@@ -1,57 +1,48 @@
 import npyscreen
 
-from Logic.class_logic import get_classes_by_trainer
+from UI.interfaces.i_menu import IMenu
+from UI.form_enums import Form
+from Logic.class_logic import ClassLogic
 
 
-class TrainerMenuForm(npyscreen.ActionForm):  # Changed to ActionForm
+class TrainerMenuForm(IMenu):
     def create(self):
-        # Title
-        self.add(npyscreen.FixedText, value="Trainer Menu", editable=False, color="STANDOUT")
-
-        # Trainer ID Input
-        self.input_field = self.add(
-            npyscreen.TitleText,
-            name="Enter Trainer ID:"
+        self.classes_status = self.add(
+            npyscreen.TitleText, name="Trainer ID: ", color="STANDOUT"
         )
 
-    def on_ok(self):  # This method is called when "OK" is pressed
-        trainer_id = self.input_field.value.strip()
-        if not trainer_id:
-            npyscreen.notify_confirm("Trainer ID cannot be empty.", title="Error")
-            self.parentApp.switchForm('MAIN')
-            return
+    def fetch_classes(self, trainer_id):
+        class_logic = ClassLogic()
+        return class_logic.get_classes_by_trainer(trainer_id)
 
-        classes = get_classes_by_trainer(trainer_id)
-        if not classes:
-            npyscreen.notify_confirm("No classes found for the given Trainer ID.", title="Error")
-            self.parentApp.switchForm('MAIN')
-            return
+    def on_ok(self):
+        trainer_id = self.classes_status.value
+        if trainer_id:
+            classes = self.fetch_classes(trainer_id)
 
-        self.parentApp.getForm('CLASS_MENU').set_classes(classes)
-        self.parentApp.switchForm('CLASS_MENU')
+            self.parentApp.getForm(Form.CLASS_MENU).set_classes(classes)
+            npyscreen.notify_confirm(str(classes))
+            self.parentApp.switchForm(Form.CLASS_MENU)
 
-    def on_cancel(self):  # This method is called when "Cancel" is pressed
-        self.parentApp.switchForm('MAIN')
+    def on_cancel(self):
+        self.parentApp.switchForm(Form.MAIN)
 
 
-class ClassMenuForm(npyscreen.ActionForm):  # Optionally change to ActionForm
+class ClassMenuForm(IMenu):
     def create(self):
         # Title
         self.add(npyscreen.FixedText, value="Classes", editable=False, color="STANDOUT")
 
         # Class List
         self.class_menu = self.add(
-            npyscreen.MultiLineAction,
-            values=[],
-            max_height=20,
-            rely=2,
-            editable=False
+            npyscreen.MultiLineAction, values=[], max_height=20, rely=2, editable=False
         )
 
     def set_classes(self, classes):
         self.fitness_classes = classes
         self.class_menu.values = [
-            f"{cls.class_name} - {cls.time} on {cls.date}" for cls in self.fitness_classes
+            f"{cls.class_name} ({cls.max_capacity}/{cls.current_capacity}) - {cls.time} on {cls.date}"
+            for cls in self.fitness_classes
         ]
         self.class_menu.display()
 
@@ -69,7 +60,7 @@ class ClassMenuForm(npyscreen.ActionForm):  # Optionally change to ActionForm
         npyscreen.notify_confirm(details, title="Fitness Class Details")
 
     def on_ok(self):
-        self.parentApp.switchForm('MAIN')
+        self.parentApp.switchForm(Form.MAIN)
 
     def on_cancel(self):
-        self.parentApp.switchForm('MAIN')
+        self.parentApp.switchForm(Form.MAIN)
