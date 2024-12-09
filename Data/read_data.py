@@ -1,5 +1,4 @@
 import csv
-from tabulate import tabulate
 import typing
 from Data.models.manager import Manager
 from Data.models.member import Member
