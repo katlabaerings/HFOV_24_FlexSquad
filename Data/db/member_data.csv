@@ -1,7 +1,7 @@
-id,firstname,lastname,email
-1,John,Johnson,john@emil.com
-2,Jane,Doe,jane@email.com
-3,Rachel,Zane,rachel@lawyer.com
-4,Louis,Litt,louis@lawyer.com
-5,Jessica,Pearson,jessica@lawyer.com
-6,Katla,Stark,katla@gmail.com
+id,firstname,lastname,email,joined_date
+1,John,Johnson,john@emil.com,2019-03-15
+2,Jane,Doe,jane@email.com,2020-03-10
+3,Rachel,Zane,rachel@lawyer.com,2021-05-22
+4,Louis,Litt,louis@lawyer.com,2022-06-10
+5,Jessica,Pearson,jessica@lawyer.com,2023-04-13
+6,Katla,Stark,katla@gmail.com,2024-01-30
