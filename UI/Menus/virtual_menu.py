@@ -1,5 +1,5 @@
 import npyscreen
-
+import webbrowser
 from UI.interfaces.i_menu import IMenu
 from Data.read_data import ReadData
 from UI.form_enums import Form
@@ -45,9 +45,16 @@ class VirtualMenu(IMenu):
                 f"Link: {selected_class.link}"
             )
             npyscreen.notify_confirm(details, title="Fitness Class Details")
+        
+            if selected_class.link:
+                webbrowser.open(selected_class.link)
+            else:
+                npyscreen.notify_confirm("No valid link available for this class.", title="Error")
+            
 
     def on_ok(self):
         self.parentApp.switchForm(Form.MAIN)
+
 
     def on_cancel(self):
         self.parentApp.setNextForm(None)
