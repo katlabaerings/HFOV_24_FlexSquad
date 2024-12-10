@@ -33,7 +33,13 @@ class MainMenu(IMenu):
         self.options = self.add(
             npyscreen.TitleSelectOne,
             name="Options",
-            values=["View Subscription Plans", "Book A Class", "See Classes", "See Virtual Classes", "Exit"],
+            values=[
+                "View Subscription Plans",
+                "Book A Class",
+                "See Classes",
+                "See Virtual Classes",
+                "Exit",
+            ],
             scroll_exit=True,
             max_height=6,
         )
@@ -59,17 +65,16 @@ class MainMenu(IMenu):
             class_logic = ClassLogic()
             class_within_hour = class_logic.is_class_within_next_hour(self.user_id)
             if class_within_hour:
-                #Within the next hour
+                # Within the next hour
                 self.user_info.value = f"Coming up: {class_within_hour.class_name} at {class_within_hour.time}!\n"
             else:
-                #next class 
+                # next class
                 next_class = class_logic.get_next_class(self.user_id)
                 if next_class:
                     self.user_info.value = f"{next_class.class_name} at {next_class.time} {next_class.date}\n"
                 else:
                     # Motivaiting out members if they have no classes
                     self.user_info.value = f"{randomMotivation}\n"
-
 
             # Add loyalty rewards for the user
             member = class_logic.get_member_by_id(self.user_id)
@@ -100,16 +105,9 @@ class MainMenu(IMenu):
                 case 2:
                     self.parentApp.switchForm(Form.PICK_CLASS)
                 case 3:
-                    self.parentApp.getForm(Form.VIRTUAL_CLASS).fetch_virtual_classes_by_id(self.parentApp.user_id)
                     self.parentApp.switchForm(Form.VIRTUAL_CLASS)
                 case 4:
                     self.parentApp.setNextForm(None)
-
-        else:
-            npyscreen.notify_confirm(
-                "Please select an option to proceed.", title="Error"
-            )
-            self.parentApp.switchForm(Form.MAIN)
 
     def on_ok(self):
         self.on_selection_change()
