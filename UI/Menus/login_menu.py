@@ -29,7 +29,7 @@ class LoginMenu(IMenu):
             self.parentApp.user_id = user_id
             class_logic = ClassLogic()
             classes = class_logic.get_classes_by_trainer(user_id)
-
+            self.parentApp.getForm(Form.VIRTUAL_CLASS).set_classes()
             self.parentApp.getForm(Form.CLASS_MENU).set_classes(classes)
             self.parentApp.switchForm(Form.MAIN)
 

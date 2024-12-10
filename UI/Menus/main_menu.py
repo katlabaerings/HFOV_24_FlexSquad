@@ -39,7 +39,13 @@ class MainMenu(IMenu):
         self.options = self.add(
             npyscreen.TitleSelectOne,
             name="Options",
-            values=["View Subscription Plans", "Book A Class", "See Classes", "Exit"],
+            values=[
+                "View Subscription Plans",
+                "Book A Class",
+                "See Classes",
+                "See Virtual Classes",
+                "Exit",
+            ],
             scroll_exit=True,
             max_height=6,
         )
@@ -105,6 +111,8 @@ class MainMenu(IMenu):
                 case 2:
                     self.parentApp.switchForm(Form.PICK_CLASS)
                 case 3:
+                    self.parentApp.switchForm(Form.VIRTUAL_CLASS)
+                case 4:
                     self.parentApp.setNextForm(None)
 
     def on_ok(self):
