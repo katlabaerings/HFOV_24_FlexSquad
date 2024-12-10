@@ -5,6 +5,8 @@ from Logic.subscription_logic import get_subscription_plans, get_plan_details
 from UI.form_enums import Form
 
 
+# For the user story:
+# "As a gym member I want more flexible subscription plans, such as one month or a single class, so that I can easily find the best subscription that suits me"
 class SubscriptionMenu(IMenu):
     def create(self):
         self.add(
@@ -111,9 +113,6 @@ class ClassBundleMenu(IMenu):
             scroll_exit=True,
             max_height=7,
         )
-
-    def update_bundle_options(self):
-        pass  # Placeholder for any dynamic updates if needed
 
     def on_ok(self):
         choice = self.bundle_options.value

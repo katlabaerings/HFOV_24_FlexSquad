@@ -5,6 +5,8 @@ from UI.classes_ui import display_all_classes, display_classes_today
 from UI.form_enums import Form
 
 
+# For the user story:
+# "As a manager I want an overview of class attendance to understand class popularity"
 class AllClassesMenu(IMenu):
     def create(self):
         classes_string = display_all_classes()
@@ -18,6 +20,7 @@ class AllClassesMenu(IMenu):
         self.parentApp.switchForm(Form.MAIN)
 
 
+# User story: "As a gym member I want to be able to see available classes so i can plan what class i want to attend"
 class ClassesTodayMenu(IMenu):
     def create(self):
         classes = display_classes_today()
@@ -52,7 +55,7 @@ class PickClassMenu(IMenu):
         choice = self.options.value
 
         if choice is not None and len(choice) > 0:
-           # npyscreen.notify_confirm(f"Debug: choice {choice}", title="Debug")
+            # npyscreen.notify_confirm(f"Debug: choice {choice}", title="Debug")
             selected = choice[0]
             match selected:
                 case 0:
