@@ -3,6 +3,7 @@ import npyscreen
 from UI.interfaces.i_menu import IMenu
 from UI.classes_ui import display_all_classes, display_classes_today
 from UI.form_enums import Form
+from Data.read_data import ReadData
 
 
 # For the user story:
