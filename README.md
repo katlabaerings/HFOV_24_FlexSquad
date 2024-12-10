@@ -6,10 +6,10 @@ On our GitHub page, under **Projects** -> **Product Backlog**, you can find a vi
 
 ---
 
-[Information about Sprint 1](#information-about-sprint-1)
-[Information about Sprint 2](#information-about-print-2)
-[Installing Requirements](#installing-requirements)
-[Run the Application](#run-the-application)
+- [Information about Sprint 1](#information-about-sprint-1)
+- [Information about Sprint 2](#information-about-print-2)
+- [Installing Requirements](#installing-requirements)
+- [Run the Application](#run-the-application)
 
 ## Information about Sprint 1
 
