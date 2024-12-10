@@ -32,7 +32,7 @@ In Sprint 2, we extended the functionality of our project by addressing the foll
 - US7: As an owner I want to motivate members to attend classes to meet fitness goals by promoting motivational quotes
 - US8: As a long-term gym member, I want to be rewarded for being a loyal customer to help me stay motivated on my fitness journey
 
-Beyond implementing these new features, we integrated the previously independent functionalities from Sprint 1 into a unified, cohesive application with a user-friendly interface (UI) using npyscreen[https://npyscreen.readthedocs.io/].
+Beyond implementing these new features, we integrated the previously independent functionalities from Sprint 1 into a unified, cohesive application with a user-friendly interface (UI) using [npyscreen](https://npyscreen.readthedocs.io/).
 
 Additionally, we categorized the preparation of the final presentation as part of Sprint 2 activities.
 
