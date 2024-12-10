@@ -3,7 +3,6 @@ import webbrowser
 from UI.interfaces.i_menu import IMenu
 from Data.read_data import ReadData
 from UI.form_enums import Form
-from Logic.class_logic import ClassLogic
 
 """
 This code is used to implement user story 2, sprint 1:
@@ -14,14 +13,6 @@ This code is used to implement user story 2, sprint 1:
 
 class VirtualMenu(IMenu):
     def create(self):
-        self.classes_status = self.add(
-            npyscreen.TitleText, name="Trainer ID: ", color="STANDOUT"
-        )
-
-    def fetch_virtual_classes(self):
-        class_logic = ClassLogic()
-        return class_logic.get_virtual_classes()
-
         self.add(npyscreen.FixedText, value="Classes", editable=False, color="STANDOUT")
 
         self.class_menu = self.add(
@@ -72,5 +63,4 @@ class VirtualMenu(IMenu):
         self.parentApp.switchForm(Form.MAIN)
 
     def on_cancel(self):
-
         self.parentApp.setNextForm(None)
