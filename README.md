@@ -1,10 +1,15 @@
 # HFOV_24_FlexSquad
 
-This repository contains the code we implemented based on the highest-priority user stories identified during Sprint 1. These priorities were set collaboratively, and the user stories were translated into actionable development tasks.
+This repository contains the code we implemented based on the highest-priority user stories identified during Sprint 1 & 2. These priorities were set collaboratively, and the user stories were translated into actionable development tasks.
 
 On our GitHub page, under **Projects** -> **Product Backlog**, you can find a visual representation of our progress and planning.
 
 ---
+
+[Information about Sprint 1](#information-about-sprint-1)
+[Information about Sprint 2](#information-about-print-2)
+[Installing Requirements](#installing-requirements)
+[Run the Application](#run-the-application)
 
 ## Information about Sprint 1
 
@@ -21,8 +26,6 @@ Initially, we interpreted that each User Story could be implemented as an indepe
 As a result, in **Sprint 2**, we focus on connecting all the independent functions into a unified program with a user interface (UI).
 
 Side note: in a few places the user_id is hardcoded so the app can show the functions.
-
----
 
 ## Information about Sprint 2
 
