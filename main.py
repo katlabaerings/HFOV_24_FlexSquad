@@ -26,7 +26,7 @@ class GymApp(npyscreen.NPSAppManaged):
         self.addForm(Form.ALL_CLASS, AllClassesMenu, name="All Classes")
         self.addForm(Form.CLASS_TODAY, ClassesTodayMenu, name="Classes Today")
         self.addForm(Form.BOOK_CLASS, BookClassMenu, name="Book Class")
-        self.addForm(Form.CLASS_MENU, VirtualMenu, name="Virtual Menu")
+        self.addForm(Form.VIRTUAL_CLASS, VirtualMenu, name="Virtual Menu")
         self.addForm(Form.POST_PLAN, PostPlanOptionsMenu, name="Post Plan Options")
         self.addForm(Form.CLASS_BUNDLE, ClassBundleMenu, name="Class Bundle Options")
         self.addForm(Form.TRAINER, TrainerMenuForm, name="View Classes by Trainer")
