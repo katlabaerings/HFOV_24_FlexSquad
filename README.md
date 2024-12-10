@@ -20,7 +20,21 @@ Initially, we interpreted that each User Story could be implemented as an indepe
 
 As a result, in **Sprint 2**, we focus on connecting all the independent functions into a unified program with a user interface (UI).
 
-Side note: in few places the user_id is hardcoded so the app can show the functions. 
+Side note: in a few places the user_id is hardcoded so the app can show the functions.
+
+---
+
+## Information about Sprint 2
+
+In Sprint 2, we extended the functionality of our project by addressing the following user stories:
+
+- US6: As a gym member I want to be able to book classes easily through platforms such as an app
+- US7: As an owner I want to motivate members to attend classes to meet fitness goals by promoting motivational quotes
+- US8: As a long-term gym member, I want to be rewarded for being a loyal customer to help me stay motivated on my fitness journey
+
+Beyond implementing these new features, we integrated the previously independent functionalities from Sprint 1 into a unified, cohesive application with a user-friendly interface (UI) using npyscreen[https://npyscreen.readthedocs.io/].
+
+Additionally, we categorized the preparation of the final presentation as part of Sprint 2 activities.
 
 ---
 

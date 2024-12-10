@@ -3,11 +3,16 @@ import npyscreen
 from Logic.class_logic import ClassLogic
 from UI.classes_ui import display_available_classes
 from UI.Menus.main_menu import Form
+from UI.interfaces.i_menu import IMenu
+
+"""
+This code is for the user story 6, sprint 2:
+    As a gym member I want to be able to book classes easily through platforms 
+    such as an app
+"""
 
 
-# This code is for the user story:
-# "As a gym member I want to be able to book classes easily through platforms such as an app"
-class BookClassMenu(npyscreen.ActionForm):
+class BookClassMenu(IMenu):
     def create(self):
         self.classes = self.add(
             npyscreen.BoxTitle,
@@ -19,7 +24,6 @@ class BookClassMenu(npyscreen.ActionForm):
 
         self.booked_class = self.add(npyscreen.TitleText, name="Class Booked: ")
 
-        # Bind the selection event to the handler
         self.classes.when_value_edited = self.set_booked_class
 
     def set_booked_class(self):

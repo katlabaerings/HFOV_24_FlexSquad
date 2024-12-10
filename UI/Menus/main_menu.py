@@ -4,6 +4,12 @@ from UI.interfaces.i_menu import IMenu
 from UI.form_enums import Form
 from Logic.class_logic import ClassLogic
 
+"""
+This code creates the form for the main menu, and user story 7 from sprint 2:
+    As a manager I want to see analytics about sign-ups and cancellations so I 
+    can take better actions in order to keep them
+"""
+
 
 class MainMenu(IMenu):
     def create(self):
@@ -39,11 +45,12 @@ class MainMenu(IMenu):
         )
         self.options.when_value_edited = self.on_selection_change
 
+    # US9
     def beforeEditing(self):
-        """Custom logic for MainMenu before editing."""
+        """Returns next classes, if it  is within the next hour, and member's loyalty points"""
         # Call the superclass lifecycle
         self.user_id = self.parentApp.user_id
-        motivaitingList = [
+        motivatingList = [
             "We are what we repeatedly do. Excellence, then, is not an act, but a habit.",
             "Just believe in yourself. Even if you don’t, just pretend that you do and at some point, you will.",
             " All progress takes place outside the comfort zone.",
@@ -52,24 +59,22 @@ class MainMenu(IMenu):
             "The real workout starts when you want to stop.",
         ]
 
-        randomMotivation = random.choice(motivaitingList)
-        # npyscreen.notify_confirm(f"Debug: userid {self.user_id}", title="Debug")
+        randomMotivation = random.choice(motivatingList)
 
         if self.user_id:
             class_logic = ClassLogic()
             class_within_hour = class_logic.is_class_within_next_hour(self.user_id)
             if class_within_hour:
-                #Within the next hour
+                # Within the next hour
                 self.user_info.value = f"Coming up: {class_within_hour.class_name} at {class_within_hour.time}!\n"
             else:
-                #next class 
+                # next class
                 next_class = class_logic.get_next_class(self.user_id)
                 if next_class:
                     self.user_info.value = f"{next_class.class_name} at {next_class.time} {next_class.date}\n"
                 else:
                     # Motivaiting out members if they have no classes
                     self.user_info.value = f"{randomMotivation}\n"
-
 
             # Add loyalty rewards for the user
             member = class_logic.get_member_by_id(self.user_id)

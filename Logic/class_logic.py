@@ -4,20 +4,37 @@ from Data.write_data import WriteData
 
 from Data.models.fitness_class import FitnessClass
 
+"""
+This code is used to implement the following user stories from sprints 1 and 2:
+    US1: As a gym member I want to be able to see available classes so i can 
+    plan what class i want to
+    US2: As a gym member, I want to be able to attend virtual classes, so I can 
+    keep working on my health and well-being, even though I can't physically be there
+    US3: As a gym member I want more flexible subscription plans, such as one 
+    month or a single class, so that I can easily find the best subscription 
+    that suits me
+    US4: As a fitness trainer I want to see how many members are attending my 
+    class so that I can be better prepared for each class
+    US5: As a manager I want an overview of class attendance to understand class popularity
+    US6: As a gym member I want to be able to book classes easily through 
+    platforms such as an app
+    US8: As a long-term gym member, I want to be rewarded for being a loyal 
+    customer to help me stay motivated on my fitness journey
+"""
 
+
+# US5
 class ClassLogic:
     def __init__(self):
         self.read = ReadData()
         self.write = WriteData()
 
-    # This function is used to implement the user story:"As a gym member I want to be able to
-    # book classes easily through platforms such as an app"
+    # US6
     def add_member_to_class(self, member_id: int, class_id: int):
         # Calls the appropriate function to sign a member to a certain class.
         return self.write.add_member_to_classDATA(member_id, class_id)
 
-    # This function is used to implement the user story: "As a fitness instructor I want to see
-    # how many members are attending my class so that I can be better prepared for each class"
+    # US1 & US4
     def get_classes_by_trainer(self, trainer_id: int) -> list[FitnessClass]:
         """Returns a list of classes that the trainer with the id is
         teaching.
@@ -28,11 +45,6 @@ class ClassLogic:
         Returns:
             list[FitnessClass]: Returns a list of FitnessClass instances
         """
-        trainer = self.read.manager_by_id(trainer_id)
-
-        # check to make sure if the manager exists, that it is of type 'trainer'
-        # if not trainer or trainer.type.lower() != "trainer":
-        #     return []
 
         all_classes = self.read.get_all_classes()
         returning_classes = []
@@ -42,9 +54,7 @@ class ClassLogic:
 
         return returning_classes
 
-    # This function is for the user story "As a gym member, I want to be able to attend virtual classes,
-    # so I can keep working on my health and well-being, even though I can’t physically be there"
-    # This function filters out all the classes that are virtual and returns a list of them.
+    # US2
     def get_virtual_classes(self):
         classes = self.read.get_all_classes()
         v_classes = []
@@ -107,10 +117,8 @@ class ClassLogic:
                 return f_class  # Return the class if it is within the next hour
 
         return None
-    
-    # These following functions (get_member_by_id, calculate_loyalty_points and get_loyalty_rewards)
-    # are for the user story: "As a long-term gym member, I want to be rewarded for being 
-    # a loyal customer to help me stay motivated on my fitness journey"
+
+    # US8
     def get_member_by_id(self, user_id: int):
         try:
             member = self.read.member_by_id(user_id)
@@ -118,7 +126,7 @@ class ClassLogic:
         except Exception as e:
             print(f"Error retrieving member with ID {user_id}: {e}")
             return None
-    
+
     def calculate_loyalty_points(self, joined_date: str) -> int:
         """Calculate loyalty points based on the member's join date."""
         try:
@@ -127,7 +135,7 @@ class ClassLogic:
             return years_as_member * 10  # 10 points per year
         except ValueError:
             return 0
-    
+
     def get_loyalty_rewards(self, points: int) -> str:
         """Determine rewards based on loyalty points."""
         if 10 <= points <= 20:
@@ -138,4 +146,3 @@ class ClassLogic:
             return "Enjoy one free juice at the Boozt Bar, a personalized food plan, and a one-on-one personal trainer session"
         else:
             return "No rewards yet, but starting your second year with us, you'll earn rewards every year!"
- 

@@ -4,6 +4,12 @@ from UI.interfaces.i_menu import IMenu
 from UI.classes_ui import display_all_classes, display_classes_today
 from UI.form_enums import Form
 
+"""
+This code is used to implement user story 1, sprint 1:
+    As a gym member I want to be able to see available classes so i can plan 
+    what class i want to attend
+"""
+
 
 class AllClassesMenu(IMenu):
     def create(self):
@@ -52,7 +58,6 @@ class PickClassMenu(IMenu):
         choice = self.options.value
 
         if choice is not None and len(choice) > 0:
-           # npyscreen.notify_confirm(f"Debug: choice {choice}", title="Debug")
             selected = choice[0]
             match selected:
                 case 0:

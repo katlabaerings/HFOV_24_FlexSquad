@@ -1,6 +1,12 @@
 import csv
-#This file implements the user story "As a gym member I want more 
-#flexible subscription plans, such as one month or a single class, so that I can easily find the best subscription that suits me"
+
+
+"""
+This code is used to implement user story 3, sprint 1:
+    As a gym member I want more flexible subscription plans, such as one month 
+    or a single class, so that I can easily find the best subscription that 
+    suits me
+"""
 
 FILE_PATH = "Data/db/subscription_data.csv"
 

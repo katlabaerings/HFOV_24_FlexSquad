@@ -4,6 +4,13 @@ from UI.interfaces.i_menu import IMenu
 from Logic.subscription_logic import get_subscription_plans, get_plan_details
 from UI.form_enums import Form
 
+"""
+This code is used to implement user story 3, sprint 1:
+    As a gym member I want more flexible subscription plans, such as one month 
+    or a single class, so that I can easily find the best subscription that 
+    suits me
+"""
+
 
 class SubscriptionMenu(IMenu):
     def create(self):
