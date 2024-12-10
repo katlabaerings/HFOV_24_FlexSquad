@@ -5,6 +5,8 @@ from UI.classes_ui import display_available_classes
 from UI.Menus.main_menu import Form
 
 
+# This code is for the user story:
+# "As a gym member I want to be able to book classes easily through platforms such as an app"
 class BookClassMenu(npyscreen.ActionForm):
     def create(self):
         self.classes = self.add(
@@ -27,6 +29,7 @@ class BookClassMenu(npyscreen.ActionForm):
         self.display()
 
     def on_ok(self):
+        self.parentApp.user_id
         if self.booked_class.value:
             added = ClassLogic().add_member_to_class(
                 self.parentApp.user_id, int(self.booked_class.value)
