@@ -2,6 +2,7 @@ import csv
 
 from Data.read_data import ReadData
 from Data.models.fitness_class import FitnessClass
+import npyscreen
 
 
 class WriteData:
@@ -15,10 +16,9 @@ class WriteData:
     def add_member_to_classDATA(self, member_id: int, class_id: int):
 
         all_classes = self.data.get_all_classes()
-
         # Modify the relevant class
         for a_class in all_classes:
-            if a_class.id == class_id:
+            if int(a_class.id) == class_id:
                 # Check if class is already at max capacity
                 if a_class.current_capacity >= a_class.max_capacity:
                     return "Cannot add member: class is at maximum capacity."

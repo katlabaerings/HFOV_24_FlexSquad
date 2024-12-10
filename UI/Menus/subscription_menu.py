@@ -5,6 +5,8 @@ from Logic.subscription_logic import get_subscription_plans, get_plan_details
 from UI.form_enums import Form
 
 
+# For the user story:
+# "As a gym member I want more flexible subscription plans, such as one month or a single class, so that I can easily find the best subscription that suits me"
 class SubscriptionMenu(IMenu):
     def create(self):
         self.add(
@@ -20,32 +22,29 @@ class SubscriptionMenu(IMenu):
             scroll_exit=True,
             max_height=10,
         )
+        self.plan_options.when_value_edited = self.on_selection_change
 
     def update_subscription(self):
         plans = get_subscription_plans()
         self.plan_options.values = [plan["PlanName"] for plan in plans]
         self.plan_options.display()
 
-    def on_ok(self):
+    def on_selection_change(self):
         choice = self.plan_options.value
-        if not choice:
-            npyscreen.notify_confirm(
-                "Please select a plan or press 'Back' to go back.",
-                title="No Selection",
-            )
-            self.parentApp.switchForm(Form.SUBSCRIPTION)
-            return
-        selected_plan = self.plan_options.values[choice[0]]
-        details = get_plan_details(selected_plan)
-        npyscreen.notify_confirm(details, title=f"Plan Details: {selected_plan}")
+        if choice is not None and len(choice) > 0:
+            selected_plan = self.plan_options.values[choice[0]]
+            details = get_plan_details(selected_plan)
+            npyscreen.notify_confirm(details, title=f"Plan Details: {selected_plan}")
 
-        if selected_plan == "Class Bundle":
-            self.parentApp.getForm(Form.CLASS_BUNDLE).update_bundle_options()
-            self.parentApp.switchForm(Form.CLASS_BUNDLE)
-        else:
-            self.parentApp.getForm(Form.POST_PLAN).selected_plan = selected_plan
-            self.parentApp.getForm(Form.POST_PLAN).update_options()
-            self.parentApp.switchForm(Form.POST_PLAN)
+            if selected_plan == "Class Bundle":
+                self.parentApp.getForm(Form.CLASS_BUNDLE).update_bundle_options()
+                self.parentApp.switchForm(Form.CLASS_BUNDLE)
+            else:
+                self.parentApp.getForm(Form.POST_PLAN).selected_plan = selected_plan
+                self.parentApp.switchForm(Form.POST_PLAN)
+
+    def on_ok(self):
+        self.on_selection_change()
 
     def on_cancel(self):
         self.parentApp.switchForm(Form.MAIN)
@@ -114,9 +113,6 @@ class ClassBundleMenu(IMenu):
             scroll_exit=True,
             max_height=7,
         )
-
-    def update_bundle_options(self):
-        pass  # Placeholder for any dynamic updates if needed
 
     def on_ok(self):
         choice = self.bundle_options.value

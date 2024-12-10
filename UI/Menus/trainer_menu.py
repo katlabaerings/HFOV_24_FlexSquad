@@ -5,6 +5,8 @@ from UI.form_enums import Form
 from Logic.class_logic import ClassLogic
 
 
+# For the user stories:
+# "As a fitness trainer I want to see how many members are attending my class so that I can be better prepared for each class"
 class TrainerMenuForm(IMenu):
     def create(self):
         self.classes_status = self.add(
@@ -41,7 +43,7 @@ class ClassMenuForm(IMenu):
     def set_classes(self, classes):
         self.fitness_classes = classes
         self.class_menu.values = [
-            f"{cls.class_name} ({cls.max_capacity}/{cls.current_capacity}) - {cls.time} on {cls.date}"
+            f"{cls.class_name} ({cls.current_capacity}/{cls.max_capacity}) - {cls.time} on {cls.date}"
             for cls in self.fitness_classes
         ]
         self.class_menu.display()

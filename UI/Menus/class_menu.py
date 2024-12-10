@@ -5,6 +5,8 @@ from UI.classes_ui import display_all_classes, display_classes_today
 from UI.form_enums import Form
 
 
+# For the user story:
+# "As a manager I want an overview of class attendance to understand class popularity"
 class AllClassesMenu(IMenu):
     def create(self):
         classes_string = display_all_classes()
@@ -18,6 +20,7 @@ class AllClassesMenu(IMenu):
         self.parentApp.switchForm(Form.MAIN)
 
 
+# User story: "As a gym member I want to be able to see available classes so i can plan what class i want to attend"
 class ClassesTodayMenu(IMenu):
     def create(self):
         classes = display_classes_today()
@@ -46,25 +49,26 @@ class PickClassMenu(IMenu):
             scroll_exit=True,
             max_height=4,
         )
+        self.options.when_value_edited = self.on_selection_change
+
+    def on_selection_change(self):
+        choice = self.options.value
+
+        if choice is not None and len(choice) > 0:
+            # npyscreen.notify_confirm(f"Debug: choice {choice}", title="Debug")
+            selected = choice[0]
+            match selected:
+                case 0:
+                    self.parentApp.switchForm(Form.ALL_CLASS)
+                case 1:
+                    self.parentApp.switchForm(Form.CLASS_MENU)
+                case 2:
+                    self.parentApp.switchForm(Form.CLASS_TODAY)
+                case _:
+                    self.parentApp.setNextForm(None)
 
     def on_ok(self):
-        choice = self.options.value
-        if not choice:
-            npyscreen.notify_confirm(
-                "Please select an option or press 'Back' to go back.",
-                title="No Selection",
-            )
-            return
-
-        selected = choice[0]
-        if selected == 0:
-            self.parentApp.switchForm(Form.ALL_CLASS)
-        elif selected == 1:
-            self.parentApp.switchForm(Form.CLASS_MENU)
-        elif selected == 2:
-            self.parentApp.setNextForm(Form.CLASS_TODAY)
-        elif selected == 3:
-            self.parentApp.setNextForm(None)
+        self.on_selection_change()
 
     def on_cancel(self):
         self.parentApp.switchForm(Form.MAIN)
