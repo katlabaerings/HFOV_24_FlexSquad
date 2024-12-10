@@ -4,14 +4,14 @@ This repository contains the code we implemented based on the highest-priority u
 
 On our GitHub page, under **Projects** -> **Product Backlog**, you can find a visual representation of our progress and planning.
 
---
+---
 
 - [Information about Sprint 1](#information-about-sprint-1)
 - [Information about Sprint 2](#information-about-print-2)
 - [Installing Requirements](#installing-requirements)
 - [Run the Application](#run-the-application)
 
---
+---
 
 ## Information about Sprint 1
 
