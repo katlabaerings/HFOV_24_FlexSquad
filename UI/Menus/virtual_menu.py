@@ -7,25 +7,31 @@ from Logic.class_logic import ClassLogic
 
 class VirtualMenu(IMenu):
     def create(self):
-        self.classes_status = self.add(
-                npyscreen.TitleText, name="Select Virtual Class", color="STANDOUT"
-            )
         virtual_classes = self.fetch_virtual_classes_by_id(self.parentApp.user_id)
-        for a_class in virtual_classes:
-            self.add(npyscreen.TitleFixedText, name=a_class.class_name)
+        self.class_names = [] 
+        self.class_selector = self.add(
+            npyscreen.TitleSelectOne,
+            max_height=10,
+            name="Available Classes:",
+            values=self.class_names,
+            scroll_exit=True
+        )
+        npyscreen.notify_confirm(str(self.class_names))
 
         
     def fetch_virtual_classes_by_id(self, id):
         ret_lis = []
         class_logic = ClassLogic()
         all_classes = class_logic.get_virtual_classes()
+        npyscreen.notify_confirm(str(all_classes))
         for a_class in all_classes:
-            if id in a_class.members.split():
+            if id in [int(b_class) for b_class in a_class.members.split()]:
                 ret_lis.append(a_class)
-        return ret_lis
+        self.class_names = ret_lis
+        self.display()
     
     def on_ok(self):
-        pass
+        self.parentApp.switchForm(Form.MAIN)
 
 
     def on_cancel(self):

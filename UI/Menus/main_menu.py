@@ -100,6 +100,7 @@ class MainMenu(IMenu):
                 case 2:
                     self.parentApp.switchForm(Form.PICK_CLASS)
                 case 3:
+                    self.parentApp.getForm(Form.VIRTUAL_CLASS).fetch_virtual_classes_by_id(self.parentApp.user_id)
                     self.parentApp.switchForm(Form.VIRTUAL_CLASS)
                 case 4:
                     self.parentApp.setNextForm(None)
