@@ -47,7 +47,7 @@ Additionally, we categorized the preparation of the final presentation as part o
 
 **Python version used:**
 
-- Python 3.13
+- Python 3.12
 
 To set up the development environment, follow these steps:
 
