@@ -1,0 +1,13 @@
+The following user stories were not implemented:
+
+US9: As a manager I want to see analytics about sign-ups and cancellations so I can take better actions in order to keep them
+
+US10: As a trainer I want to know which of classes are the most popular so I can add more time slots
+
+We decided not to implement those two due to complexity and poor vision in the beginning. 
+Upon further inspection of the user stories, we found them a little too complicated considering the whole of the project. 
+We also acknowledge that our priority categorisation was a bit off since both of these user stories we skipped were categorised 
+as P1 (2 out of 3). 
+
+
+
